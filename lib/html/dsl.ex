@@ -25,26 +25,26 @@ defmodule HTML.DSL do
     end
   end
 
-  defmacro div(do: body) do
+  defmacro add_tag(tagname, content) do
     quote do
       import Helpers
       alias Rockside.HTML.Assembly.St
-      var!(st) = var!(st) |> St.push(tag_start(:div))
-      var!(st) = var!(st) |> St.push(fn ->
+      var!(st) = var!(st) |> St.push(tag_start(unquote(tagname)))
+      var!(st) = var!(st) |> St.push(unquote(content))
+      var!(st) = var!(st) |> St.push(tag_end(unquote(tagname)))
+    end
+  end
+
+  defmacro div(do: body) do
+    quote do
+      add_tag(:div, fn ->
         builder do: unquote(body)
       end.())
-      var!(st) = var!(st) |> St.push(tag_end(:div))
     end
   end
 
   defmacro div(content) do
-    quote do
-      import Helpers
-      alias Rockside.HTML.Assembly.St
-      var!(st) = var!(st) |> St.push(tag_start(:div))
-      var!(st) = var!(st) |> St.push(unquote(content))
-      var!(st) = var!(st) |> St.push(tag_end(:div))
-    end
+    quote do: add_tag(:div, unquote(content))
   end
 
 end
