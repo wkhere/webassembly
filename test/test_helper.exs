@@ -6,5 +6,5 @@ defmodule Rockside.HTML.TestHelper do
   end
 
   def no_lf(s), do: String.replace(s, "\n", "")
-  def no_ws(s), do: Regex.replace(~r/\s/, s, "")
+  def no_indent(s), do: Regex.replace(~r/^\s+/m, s, "")
 end
