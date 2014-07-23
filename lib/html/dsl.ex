@@ -47,4 +47,10 @@ defmodule HTML.DSL do
     quote do: add_tag(:div, unquote(content))
   end
 
+  defmacro text(content) do
+    quote do
+      var!(st) = var!(st) |> St.push(unquote(content))
+    end
+  end
+
 end

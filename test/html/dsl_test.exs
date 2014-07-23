@@ -40,11 +40,11 @@ defmodule DSL.Test do
   test "one step at the time ;)" do
     buf = builder do
       div do
-        st = st |> St.push("foo")
+        text "foo"
         div do
-          st = st |> St.push("inner")
+          text "inner"
         end
-        st = st |> St.push("bar")
+        text ["bar", "quux"]
       end
     end
     assert buf  |> flush == """
@@ -53,7 +53,7 @@ defmodule DSL.Test do
         <div>
           inner
         </div>
-        bar
+        barquux
       </div>
       """
       |> no_indent |> no_lf
