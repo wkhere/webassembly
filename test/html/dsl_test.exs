@@ -21,25 +21,25 @@ defmodule DSL.Test do
     assert buf == ["<foo>", "content", "</foo>"]
   end
 
-  test "builder with mixed level divs, no single enclosing element" do
+  test "builder with mixed level tags/text, no single enclosing element" do
     buf = builder do
       div "foo"
       div do
-        div "bar"
+        span "bar"
       end
     end
     assert buf |> flush == """
       <div>foo</div>
       <div>
-        <div>bar</div>
+        <span>bar</span>
       </div>
       """
       |> no_indent |> no_lf
   end
 
-  test "one step at the time ;)" do
+  test "more variations of tags w/ enclosing html element" do
     buf = builder do
-      div do
+      html do
         text "foo"
         div do
           text "inner"
@@ -48,13 +48,13 @@ defmodule DSL.Test do
       end
     end
     assert buf  |> flush == """
-      <div>
+      <html>
         foo
         <div>
           inner
         </div>
         barquux
-      </div>
+      </html>
       """
       |> no_indent |> no_lf
   end
