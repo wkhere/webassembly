@@ -14,11 +14,11 @@ defmodule DSL.Test do
     assert buf == [:x, :y]
   end
 
-  test "builder with one content div" do
+  test "builder with one content tag" do
     buf = builder do
-      div "foo"
+      tag :foo, "content"
     end
-    assert buf == ["<div>", "foo", "</div>"]
+    assert buf == ["<foo>", "content", "</foo>"]
   end
 
   test "builder with mixed level divs, no single enclosing element" do

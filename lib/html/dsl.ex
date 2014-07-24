@@ -35,17 +35,26 @@ defmodule HTML.DSL do
     end
   end
 
-  defmacro div(do: body) do
+  defmacro tag(tagname, do: body) do
     quote do
-      add_tag(:div, fn ->
+      add_tag(unquote(tagname), fn ->
         builder do: unquote(body)
       end.())
     end
   end
 
-  defmacro div(content) do
-    quote do: add_tag(:div, unquote(content))
+  defmacro tag(tagname, content) do
+    quote do: add_tag(unquote(tagname), unquote(content))
   end
+
+  ~w[div]
+    |> Enum.each fn name ->
+      sym = :"#{name}"
+      defmacro unquote(sym)(whatever) do
+        t = unquote(sym)
+        quote do: tag(unquote(t), unquote(whatever))
+      end
+    end
 
   defmacro text(content) do
     quote do
