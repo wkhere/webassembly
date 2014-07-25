@@ -85,7 +85,7 @@ defmodule HTML.DSL do
   # todo: somehow prevent from span(span("a"))
 
   ~w[
-    html head title base link meta style
+    head title base link meta style
     script noscript template
     body section nav article aside h1 h2 h3 h4 h5 h6
     header footer address main
@@ -106,6 +106,13 @@ defmodule HTML.DSL do
         quote do: tag(unquote(t), unquote(attrs), unquote(whatever))
       end
     end
+
+  defmacro html(attrs\\[], whatever) do
+    quote do
+      add_val! "<!DOCTYPE html>"
+      tag(:html, unquote(attrs), unquote(whatever))
+    end
+  end
 
   defmacro text(content) do
     quote do: add_val! unquote(content)

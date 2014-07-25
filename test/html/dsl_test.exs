@@ -49,7 +49,7 @@ defmodule DSL.Test do
       end
     end
     assert buf  |> flush == """
-      <html>
+      <!DOCTYPE html><html>
         foo
         <div>
           inner
