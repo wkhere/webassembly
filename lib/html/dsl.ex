@@ -47,6 +47,28 @@ defmodule HTML.DSL do
     quote do: add_tag(unquote(tagname), unquote(content))
   end
 
+
+  # pick / gather for loops & closures
+
+  defmacro pick(expr) do
+    quote do
+      unquote(expr)
+      var!(st)
+    end
+  end
+
+  defmacro gather(new_scope_expr) do
+    quote do
+      inner_content = case unquote(new_scope_expr) do
+        states when is_list(states) ->
+          states |> Enum.map fn st=%St{stack: _} -> St.release(st) end
+        st=%St{stack: _} ->
+          St.release(st)
+      end
+      var!(st) = var!(st) |> St.push(inner_content)
+    end
+  end
+
   # todo: somehow prevent from span(span("a"))
 
   ~w[

@@ -59,4 +59,40 @@ defmodule DSL.Test do
       |> no_indent |> no_lf
   end
 
+  test "gather/pick with a list comprehension" do
+    buf = builder do
+      ul do
+        gather for x <- 1..2, do: pick li "#{x}"
+      end
+    end
+    assert buf |> flush == """
+      <ul>
+        <li>1</li>
+        <li>2</li>
+      </ul>
+      """
+      |> no_indent |> no_lf
+  end
+
+  test "gather/pick with Enum.map" do
+    buf = builder do
+      ul do
+        gather Enum.map 1..2, &(pick li "#{&1}")
+      end
+    end
+    assert buf |> flush == """
+      <ul>
+        <li>1</li>
+        <li>2</li>
+      </ul>
+      """
+      |> no_indent |> no_lf
+  end
+
+  test "gather/pick with a closure" do
+    buf = builder do
+      gather (fn -> pick span "foo" end).()
+    end
+    assert buf |> flush == "<span>foo</span>"
+  end
 end
