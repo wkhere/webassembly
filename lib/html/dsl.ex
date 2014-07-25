@@ -34,7 +34,6 @@ defmodule HTML.DSL do
   defmacro add_tag!(tagname, content) do
     quote do
       import Helpers
-      alias Rockside.HTML.Assembly.St
       add_val! tag_start(unquote(tagname))
       add_val! unquote(content)
       add_val! tag_end(unquote(tagname))
