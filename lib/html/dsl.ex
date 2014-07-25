@@ -25,26 +25,32 @@ defmodule HTML.DSL do
     end
   end
 
-  defmacro add_tag(tagname, content) do
+  defmacro add_val!(v) do
+    quote do
+      var!(st) = var!(st) |> St.push(unquote(v))
+    end
+  end
+
+  defmacro add_tag!(tagname, content) do
     quote do
       import Helpers
       alias Rockside.HTML.Assembly.St
-      var!(st) = var!(st) |> St.push(tag_start(unquote(tagname)))
-      var!(st) = var!(st) |> St.push(unquote(content))
-      var!(st) = var!(st) |> St.push(tag_end(unquote(tagname)))
+      add_val! tag_start(unquote(tagname))
+      add_val! unquote(content)
+      add_val! tag_end(unquote(tagname))
     end
   end
 
   defmacro tag(tagname, do: body) do
     quote do
-      add_tag(unquote(tagname), fn ->
+      add_tag!(unquote(tagname), fn ->
         builder do: unquote(body)
       end.())
     end
   end
 
   defmacro tag(tagname, content) do
-    quote do: add_tag(unquote(tagname), unquote(content))
+    quote do: add_tag!(unquote(tagname), unquote(content))
   end
 
 
@@ -65,7 +71,7 @@ defmodule HTML.DSL do
         st=%St{stack: _} ->
           St.release(st)
       end
-      var!(st) = var!(st) |> St.push(inner_content)
+      add_val! inner_content
     end
   end
 
@@ -95,9 +101,7 @@ defmodule HTML.DSL do
     end
 
   defmacro text(content) do
-    quote do
-      var!(st) = var!(st) |> St.push(unquote(content))
-    end
+    quote do: add_val! unquote(content)
   end
 
 end
