@@ -47,6 +47,8 @@ defmodule HTML.DSL do
     quote do: add_tag(unquote(tagname), unquote(content))
   end
 
+  # todo: somehow prevent from span(span("a"))
+
   ~w[
     html head title base link meta style
     script noscript template
