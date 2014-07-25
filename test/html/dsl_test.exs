@@ -4,6 +4,7 @@ defmodule DSL.Test do
   use    ExUnit.Case
   import HTML.TestHelper
   import HTML.DSL
+  import Kernel, except: [div: 2]
 
   test "basic builder" do
     buf = builder do
@@ -94,5 +95,25 @@ defmodule DSL.Test do
       gather (fn -> pick span "foo" end).()
     end
     assert buf |> flush == "<span>foo</span>"
+  end
+
+  test "attrs" do
+    buf = builder do
+      span [class: "hilight"], "foo"
+      div [id: :matrix, class: "shiny"] do
+        text "heyy!"
+        span [style: "outline: 1px"], "are you in matrix?"
+      end
+    end
+    assert buf |> flush == """
+      <span class="hilight">foo</span>
+      <div id="matrix" class="shiny">
+        heyy!
+        <span style="outline: 1px">
+          are you in matrix?
+        </span>
+      </div>
+      """
+      |> no_indent |> no_lf
   end
 end

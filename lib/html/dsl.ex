@@ -5,9 +5,15 @@ defmodule HTML.DSL do
   require St
 
   defmodule Helpers do
-    defmacro tag_start(tag) do
+    import Rockside.HTML.Assembly.Tools, only: [htmlize_attrs: 1]
+
+    defmacro tag_start(tag, []) do
       quote do: "<#{unquote(tag)}>"
     end
+    defmacro tag_start(tag, attrs) do
+      quote do: ["<#{unquote(tag)} ", htmlize_attrs(unquote(attrs)), ">"]
+    end
+
     defmacro tag_end(tag) do
       quote do: "</#{unquote(tag)}>"
     end
@@ -31,25 +37,27 @@ defmodule HTML.DSL do
     end
   end
 
-  defmacro add_tag!(tagname, content) do
+  defmacro add_tag!(tagname, attrs, content) do
     quote do
       import Helpers
-      add_val! tag_start(unquote(tagname))
+      add_val! tag_start(unquote(tagname), unquote(attrs))
       add_val! unquote(content)
       add_val! tag_end(unquote(tagname))
     end
   end
 
-  defmacro tag(tagname, do: body) do
+  defmacro tag(tagname, attrs\\[], rest)
+
+  defmacro tag(tagname, attrs, do: body) do
     quote do
-      add_tag!(unquote(tagname), fn ->
+      add_tag!(unquote(tagname), unquote(attrs), fn ->
         builder do: unquote(body)
       end.())
     end
   end
 
-  defmacro tag(tagname, content) do
-    quote do: add_tag!(unquote(tagname), unquote(content))
+  defmacro tag(tagname, attrs, content) do
+    quote do: add_tag!(unquote(tagname), unquote(attrs), unquote(content))
   end
 
 
@@ -93,9 +101,9 @@ defmodule HTML.DSL do
     details summary menuitem menu
     ] |> Enum.each fn name ->
       sym = :"#{name}"
-      defmacro unquote(sym)(whatever) do
+      defmacro unquote(sym)(attrs\\[], whatever) do
         t = unquote(sym)
-        quote do: tag(unquote(t), unquote(whatever))
+        quote do: tag(unquote(t), unquote(attrs), unquote(whatever))
       end
     end
 
