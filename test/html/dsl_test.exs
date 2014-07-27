@@ -8,9 +8,9 @@ defmodule DSL.Test do
 
   test "basic builder" do
     buf = builder do
-      st = st |> St.push :x
+      add_val! :x
       _foo = "anything in between"
-      st = st |> St.push :y
+      add_val! :y
     end
     assert buf == [:x, :y]
   end
