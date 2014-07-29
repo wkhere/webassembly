@@ -74,8 +74,8 @@ defmodule HTML.DSL do
     quote do
       inner_content = case unquote(new_scope_expr) do
         states when is_list(states) ->
-          states |> Enum.map fn st=%St{stack: _} -> St.release(st) end
-        st=%St{stack: _} ->
+          states |> Enum.map fn st=%St{} -> St.release(st) end
+        st=%St{} ->
           St.release(st)
       end
       add_val! inner_content
