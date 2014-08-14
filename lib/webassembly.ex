@@ -1,2 +1,2 @@
-defmodule Webassembly do
+defmodule WebAssembly do
 end
