@@ -9,7 +9,8 @@ defmodule Webassembly.Mixfile do
   end
 
   def application do
-    [applications: []]
+    [applications: [],
+      description: 'Web DSL']
   end
 
  defp deps do
