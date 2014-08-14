@@ -22,6 +22,18 @@ defmodule DSL.Test do
     assert buf == ["<foo>", "content", "</foo>"]
   end
 
+  test "builder with void tags" do
+    buf = builder do
+      tag_void :foo
+      tag_void :bar, class: "high"
+    end
+    assert buf |> flush == """
+      <foo />
+      <bar class="high" />
+    """
+    |> no_indent |> no_lf
+  end
+
   test "builder with mixed level tags/text, no single enclosing element" do
     buf = builder do
       div "foo"
@@ -41,20 +53,32 @@ defmodule DSL.Test do
   test "more variations of tags w/ enclosing html element" do
     buf = builder do
       html do
-        text "foo"
-        div do
-          text "inner"
+        head do
+          meta http_equiv: "Content-Type", content: "text/html"
+          title "hey!"
         end
-        text ["bar", "quux"]
+        body do
+          text "foo"
+          div do
+            text "inner"
+          end
+          text ["bar", "quux"]
+        end
       end
     end
     assert buf  |> flush == """
       <!DOCTYPE html><html>
-        foo
-        <div>
-          inner
-        </div>
-        barquux
+        <head>
+          <meta http-equiv="Content-Type" content="text/html" />
+          <title>hey!</title>
+        </head>
+        <body>
+          foo
+          <div>
+            inner
+          </div>
+          barquux
+        </body>
       </html>
       """
       |> no_indent |> no_lf
