@@ -4,6 +4,14 @@ defmodule HTML.DSL do
   alias   Rockside.HTML.Assembly.St
   require St
 
+  defmacro __using__(_opts) do
+    quote do
+      import Kernel, except: [div: 2]
+      import Rockside.HTML.DSL
+    end
+  end
+
+
   defmodule Helpers do
     import Rockside.HTML.Assembly.Tools, only: [htmlize_attrs: 1]
 

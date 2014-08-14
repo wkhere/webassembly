@@ -3,8 +3,7 @@ alias Rockside.HTML
 defmodule DSL.Test do
   use    ExUnit.Case
   import HTML.TestHelper
-  import HTML.DSL
-  import Kernel, except: [div: 2]
+  use    HTML.DSL
 
   test "basic builder" do
     buf = builder do
