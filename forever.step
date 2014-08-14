@@ -1,0 +1,17 @@
+#!/bin/bash -e
+# script used by https://github.com/herenowcoder/forever tool
+
+if [ "$1" == files ]; then
+    find lib test *.exs -type f -name '*.ex*'
+    exit
+fi
+
+ctags_dirs="."
+for d in $(dirname $(which erl))/../lib/{kernel*,stdlib*}/src ; do ctags_dirs="$ctags_dirs $d"; done
+if [ -n "$Elixir_src" ]; then
+    ctags_dirs="$ctags_dirs $Elixir_src/lib/elixir/lib"
+fi
+
+echo -n "Compiling dev.. "; time mix compile
+which ctags >/dev/null && ctags -R $ctags_dirs &
+echo -n "Running tests.. "; mix test
