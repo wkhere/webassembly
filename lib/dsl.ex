@@ -1,19 +1,17 @@
-alias Rockside.HTML
-
-defmodule HTML.DSL do
-  alias   Rockside.HTML.Assembly.St
+defmodule WebAssembly.DSL do
+  alias   WebAssembly.Core.St
   require St
 
   defmacro __using__(_opts) do
     quote do
       import Kernel, except: [div: 2]
-      import Rockside.HTML.DSL
+      import WebAssembly.DSL
     end
   end
 
 
   defmodule Helpers do
-    import Rockside.HTML.Assembly.Tools, only: [htmlize_attrs: 1]
+    import WebAssembly.Tools, only: [htmlize_attrs: 1]
 
     defmacro tag_start(tag, []) do
       quote do: "<#{unquote(tag)}>"
@@ -38,7 +36,7 @@ defmodule HTML.DSL do
 
   defmacro builder(do: body) do
     quote do
-      alias Rockside.HTML.Assembly.St
+      alias WebAssembly.Core.St
       var!(st) = St.new
       unquote(body)
       St.release(var!(st))

@@ -1,4 +1,4 @@
-defmodule Rockside.HTML.Assembly.Types do
+defmodule WebAssembly.Types do
 
   @type tagname  :: atom
   @type attrs    :: [{atom, String.t}]

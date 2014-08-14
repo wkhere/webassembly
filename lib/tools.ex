@@ -1,7 +1,5 @@
-alias Rockside.HTML.Assembly
-
-defmodule Assembly.Tools do
-  alias Assembly.Types, as: T
+defmodule WebAssembly.Tools do
+  alias WebAssembly.Core.Types, as: T
 
   @spec htmlize_attrs(T.attrs) :: [String.t]
 

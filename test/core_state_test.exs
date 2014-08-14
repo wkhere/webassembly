@@ -1,9 +1,8 @@
-alias Rockside.HTML
-alias HTML.Assembly
+alias WebAssembly.Core.St
 
-defmodule Assembly.St.Test do
+defmodule St.Test do
   use    ExUnit.Case
-  import Assembly.St
+  import St
 
   test "new state has empty stack" do
     assert new.stack == []

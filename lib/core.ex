@@ -1,9 +1,9 @@
-alias Rockside.HTML
+alias WebAssembly.Core
 
-defmodule HTML.Assembly do
+defmodule Core do
 
   defmodule St do
-    require HTML.Assembly.Types, as: T
+    require WebAssembly.Types, as: T
 
     defstruct stack: []
     @type t :: %St{stack: [T.content]}

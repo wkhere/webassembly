@@ -1,9 +1,9 @@
-alias Rockside.HTML
+alias WebAssembly.DSL
 
 defmodule DSL.Test do
   use    ExUnit.Case
-  import HTML.TestHelper
-  use    HTML.DSL
+  import WebAssembly.TestHelper
+  use    DSL
 
   test "basic builder" do
     buf = builder do
