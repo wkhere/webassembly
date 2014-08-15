@@ -112,4 +112,10 @@ defmodule WebAssembly.Test do
       """
       |> no_indent |> no_lf
   end
+
+  test "case of span(span :foo)" do
+    assert_raise ArgumentError, fn -> builder do: span(pick span :foo) end
+    # here `pick` is only to prevent from compilation warning on unused st var
+    # the pathological case stays the same as if there was no `pick`
+  end
 end

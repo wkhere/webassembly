@@ -24,6 +24,9 @@ defmodule Core do
     Pushes `value` into the `state`.
     """
     @spec push(t, T.content) :: t
+    def push(_, %__MODULE__{} = value) do
+      raise ArgumentError, "cant push state as a value: #{inspect value}"
+    end
     def push(%{stack: s} = state, value) do
       %{state | stack: [value|s]}
     end

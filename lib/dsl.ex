@@ -111,6 +111,4 @@ defmodule WebAssembly.DSL do
     end
   end
 
-  # todo: somehow prevent from span(span("a"))
-
 end
