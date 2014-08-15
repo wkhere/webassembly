@@ -97,4 +97,10 @@ defmodule St.Test do
       """ |> no_indent |> no_lf
   end
 
+  test "use nonstrict state" do
+    nonstrict_st = %{stack: []}
+    assert ( nonstrict_st |> push(1) |> release ) == [1]
+    # a possible hack: use of non-Core.St.t map like above will work,
+    # but will be detected by the dialyzer when in compiled modules
+  end
 end
