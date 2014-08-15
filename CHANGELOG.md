@@ -1,3 +1,7 @@
+### v0.1.1
+
+Refactoring, typespec fixes and 100% test coverage.
+
 ### v0.1.0
 
 Version extracted from my [Rockside] project.
