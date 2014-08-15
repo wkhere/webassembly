@@ -34,16 +34,7 @@ defmodule WebAssembly.DSL do
   end
 
 
-  # basic api
-
-  defmacro builder(do: body) do
-    quote do
-      alias WebAssembly.Core.St
-      var!(st) = St.new
-      unquote(body)
-      St.release(var!(st))
-    end
-  end
+  # internal api
 
   defmacro add_val!(v) do
     quote do
@@ -64,6 +55,18 @@ defmodule WebAssembly.DSL do
     quote do
       import TagChunks
       add_val! tag_only(unquote(tagname), unquote(attrs))
+    end
+  end
+
+
+  # basic api
+
+  defmacro builder(do: body) do
+    quote do
+      alias WebAssembly.Core.St
+      var!(st) = St.new
+      unquote(body)
+      St.release(var!(st))
     end
   end
 
