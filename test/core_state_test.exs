@@ -10,20 +10,16 @@ defmodule St.Test do
     [tag_start(name,[]), content, tag_end(name)]
   end
 
-  test "new state has empty stack" do
-    assert new.stack == []
+  test "new state releases empty list" do
+    assert ( new |> release ) == []
   end
 
-  test "push anything" do
-    assert ( new |> push(1) ).stack == [1]
+  test "push 1 value releases list with this value only" do
+    assert ( new |> push(1) |> release ) == [1]
   end
 
-  test "2x push anything" do
-    assert ( new |> push(1) |> push(2) ).stack == [2,1]
-  end
-
-  test "2x push anything + release" do
-    assert new |> push(1) |> push(2) |> release == [1,2]
+  test "push 2 values releases list of these values in the order of pushes" do
+    assert ( new |> push(1) |> push(2) |> release ) == [1,2]
   end
 
   test "push one tag" do
