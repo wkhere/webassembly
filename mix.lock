@@ -1,0 +1,3 @@
+%{"excoveralls": {:package, "0.3.2"},
+  "jsex": {:package, "2.0.0"},
+  "jsx": {:package, "2.0.4"}}

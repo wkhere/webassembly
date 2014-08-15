@@ -5,7 +5,8 @@ defmodule Webassembly.Mixfile do
     [app: :webassembly,
      version: "0.0.1-dev",
      elixir: "~> 0.15.1",
-     deps: deps]
+     deps: deps,
+     test_coverage: [tool: ExCoveralls]]
   end
 
   def application do
@@ -14,6 +15,6 @@ defmodule Webassembly.Mixfile do
   end
 
  defp deps do
-    []
+    [{:excoveralls, "~> 0.3.2", only: :test}]
   end
 end
