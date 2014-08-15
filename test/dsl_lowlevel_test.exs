@@ -23,6 +23,30 @@ defmodule DSL.LowLevelTest do
     assert buf == ["<foo>", "content", "</foo>"]
   end
 
+  test "builder with nested content tags" do
+    buf = builder do
+      tag :foo do
+        tag :bar, "content"
+      end
+    end
+    assert buf == ["<foo>", ["<bar>", "content", "</bar>"], "</foo>"]
+  end
+
+  test "builder with nested content tags and some siblings" do
+    buf = builder do
+      add_val! "simple text 1"
+      tag :foo do
+        tag :bar, "inner tag"
+        add_val! "inner text"
+      end
+      add_val! "simple text 2"
+    end
+    assert buf ==
+      ["simple text 1", "<foo>",
+        ["<bar>", "inner tag", "</bar>", "inner text"],
+       "</foo>", "simple text 2"]
+  end
+
   test "builder with void tags" do
     buf = builder do
       tag_void :foo
