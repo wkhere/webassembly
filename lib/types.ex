@@ -1,4 +1,7 @@
 defmodule WebAssembly.Types do
+  @moduledoc """
+  Types of input and output data used in the tag assembly.
+  """
 
   @type tagname  :: atom
   @type attrs    :: [{atom, String.t}]

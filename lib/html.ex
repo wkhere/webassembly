@@ -1,6 +1,6 @@
 defmodule WebAssembly.HTML do
   @moduledoc """
-  HTML5 wrapper macros to be used inside `WebAssembly.DSL.builder/1`
+  HTML5 wrapper macros to be used inside `WebAssembly.DSL.builder/1`.
   """
 
   defmacro __using__(_opts) do
