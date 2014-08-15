@@ -11,7 +11,7 @@ defmodule WebAssembly.ReadmeExample.Test do
         <title>foo</title>
       </head>
       <body>
-        <div class="mydiv">
+        <div class="mydiv" id="myid">
           <ul>
             <li>1</li>
             <li>second</li>

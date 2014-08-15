@@ -14,7 +14,7 @@ defmodule WebAssembly.Examples do
           title "foo"
         end
         body do
-          div class: "mydiv" do
+          div class: "mydiv", id: :myid do
             ul do
               li 1
               if all_goes_well, do:
