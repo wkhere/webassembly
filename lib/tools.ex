@@ -41,6 +41,11 @@ defmodule WebAssembly.Tools do
     @doc ~S"""
     Flush nested list of tag fragments into a flat string.
 
+    Flushing is not needed when you pass tag fragments
+    directly to Plug. Still it may come handy when testing,
+    prototyping or using WebAssembly output together with
+    web views based on templates.
+
     ## Examples
         iex(1)> use WebAssembly
         nil
@@ -55,7 +60,5 @@ defmodule WebAssembly.Tools do
     def flush(chunks) when is_list(chunks) do
       chunks |> List.flatten |> Enum.join
     end
-    # flush/1 needed only for plug-free tests, because patched Plug
-    # accepts iolist as a resp body
   end
 end
