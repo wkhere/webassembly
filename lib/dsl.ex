@@ -61,6 +61,8 @@ defmodule WebAssembly.DSL do
 
   # basic api
 
+  defmacro builder(do_block)
+
   defmacro builder(do: body) do
     quote do
       alias WebAssembly.Core.St
