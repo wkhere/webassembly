@@ -1,7 +1,7 @@
 defmodule WebAssembly.Test do
   use    ExUnit.Case
   import WebAssembly.TestHelper
-  use    WebAssembly 
+  use    WebAssembly
 
   test "mixed level tags/text, no single enclosing element" do
     buf = builder do
@@ -27,7 +27,7 @@ defmodule WebAssembly.Test do
           title "hey!"
         end
         body do
-          text "foo"
+          text "foo"; br
           div do
             text "inner"
           end
@@ -42,7 +42,7 @@ defmodule WebAssembly.Test do
           <title>hey!</title>
         </head>
         <body>
-          foo
+          foo<br />
           <div>
             inner
           </div>
@@ -93,7 +93,7 @@ defmodule WebAssembly.Test do
   test "attrs" do
     buf = builder do
       span [class: "hilight"], "foo"
-      div [id: :matrix, class: "shiny"] do
+      div id: :matrix, class: "shiny" do
         text "heyy!"
         span [style: "outline: 1px"], "are you in matrix?"
       end
