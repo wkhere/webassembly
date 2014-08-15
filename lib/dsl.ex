@@ -1,9 +1,18 @@
 defmodule WebAssembly.DSL do
+  @moduledoc """
+  DSL for assembling tag blocks into iolist.
+
+  Tag blocks can be intermixed with regular Elixir syntax.
+  """
+
   alias   WebAssembly.Core.St
   require St
 
 
   defmodule TagChunks do
+    @moduledoc """
+    Macros producing iolist with tag starts & ends plus tag attributes.
+    """
     import WebAssembly.Tools, only: [htmlize_attrs: 1]
 
     defmacro tag_start(tag, []) do
