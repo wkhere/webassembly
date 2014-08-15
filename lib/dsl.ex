@@ -13,7 +13,7 @@ defmodule WebAssembly.DSL do
     @moduledoc """
     Macros producing iolist with tag starts & ends plus tag attributes.
     """
-    import WebAssembly.Tools, only: [htmlize_attrs: 1]
+    import WebAssembly.Tools.Input, only: [htmlize_attrs: 1]
 
     defmacro tag_start(tag, []) do
       quote do: "\n<#{unquote(tag)}>"
