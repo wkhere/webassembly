@@ -3,6 +3,9 @@ defmodule WebAssembly.Test do
   import WebAssembly.TestHelper
   use    WebAssembly
 
+  doctest WebAssembly.Tools.Input
+  doctest WebAssembly.Tools.Output
+
   test "mixed level tags/text, no single enclosing element" do
     buf = builder do
       div "foo"
