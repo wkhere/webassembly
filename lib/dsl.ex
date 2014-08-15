@@ -7,10 +7,10 @@ defmodule WebAssembly.DSL do
     import WebAssembly.Tools, only: [htmlize_attrs: 1]
 
     defmacro tag_start(tag, []) do
-      quote do: "<#{unquote(tag)}>"
+      quote do: "\n<#{unquote(tag)}>"
     end
     defmacro tag_start(tag, attrs) do
-      quote do: ["<#{unquote(tag)} ", htmlize_attrs(unquote(attrs)), ">"]
+      quote do: ["\n<#{unquote(tag)} ", htmlize_attrs(unquote(attrs)), ">"]
     end
 
     defmacro tag_end(tag) do
@@ -20,7 +20,7 @@ defmodule WebAssembly.DSL do
     defmacro tag_only(tag, []), do:
       quote do: "<#{unquote(tag)} />"
     defmacro tag_only(tag, attrs) do
-      quote do: ["<#{unquote(tag)} ", htmlize_attrs(unquote(attrs)), " />"]
+      quote do: ["\n<#{unquote(tag)} ", htmlize_attrs(unquote(attrs)), " />"]
     end
   end
 

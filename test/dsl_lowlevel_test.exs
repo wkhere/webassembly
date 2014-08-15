@@ -18,7 +18,7 @@ defmodule DSL.LowLevelTest do
     buf = builder do
       tag :foo, "content"
     end
-    assert buf == ["<foo>", "content", "</foo>"]
+    assert buf == ["\n<foo>", "content", "</foo>"]
   end
 
   test "nested content tags" do
@@ -27,7 +27,7 @@ defmodule DSL.LowLevelTest do
         tag :bar, "content"
       end
     end
-    assert buf == ["<foo>", ["<bar>", "content", "</bar>"], "</foo>"]
+    assert buf == ["\n<foo>", ["\n<bar>", "content", "</bar>"], "</foo>"]
   end
 
   test "nested content tags and some siblings" do
@@ -40,8 +40,8 @@ defmodule DSL.LowLevelTest do
       add_val! "simple text 2"
     end
     assert buf ==
-      ["simple text 1", "<foo>",
-        ["<bar>", "inner tag", "</bar>", "inner text"],
+      ["simple text 1", "\n<foo>",
+        ["\n<bar>", "inner tag", "</bar>", "inner text"],
        "</foo>", "simple text 2"]
   end
 
@@ -52,8 +52,8 @@ defmodule DSL.LowLevelTest do
       end
     end
     assert buf ==
-      [["<foo ", [~s/class="highclass"/, " ", ~s/id="42"/], ">"],
-       [["<span ", [~s/style="dotted"/], ">"], "good morning", "</span>"],
+      [["\n<foo ", [~s/class="highclass"/, " ", ~s/id="42"/], ">"],
+       [["\n<span ", [~s/style="dotted"/], ">"], "good morning", "</span>"],
        "</foo>"]
   end
 

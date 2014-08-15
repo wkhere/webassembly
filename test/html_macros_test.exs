@@ -9,7 +9,7 @@ defmodule WebAssembly.HTMLMacrosTest do
       doc = builder do: unquote(tag)(class: "foo")
       doc_no_attrs = builder do: unquote(tag)()
       tag = unquote(tag)
-      assert doc == [["<#{tag} ", [~s/class="foo"/], " />"]]
+      assert doc == [["\n<#{tag} ", [~s/class="foo"/], " />"]]
       assert doc_no_attrs == ["<#{tag} />"]
     end
   end
@@ -21,9 +21,9 @@ defmodule WebAssembly.HTMLMacrosTest do
       doc_no_attrs = builder do: unquote(tag)("content")
       tag = unquote(tag)
       assert doc ==
-        [["<#{tag} ", [~s/class="foo"/], ">"], "content", "</#{tag}>"]
+        [["\n<#{tag} ", [~s/class="foo"/], ">"], "content", "</#{tag}>"]
       assert doc_no_attrs ==
-        ["<#{tag}>", "content", "</#{tag}>"]
+        ["\n<#{tag}>", "content", "</#{tag}>"]
     end
   end 
 end
