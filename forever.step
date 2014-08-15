@@ -14,4 +14,6 @@ fi
 
 echo -n "Compiling dev.. "; time mix compile
 which ctags >/dev/null && ctags -R $ctags_dirs &
+[[ $1 == doc* ]] && mix docs &
+[[ $1 == dia* ]] && mix dialyze --no-check &
 echo -n "Running tests.. "; mix test
