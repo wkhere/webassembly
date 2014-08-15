@@ -3,7 +3,7 @@ defmodule Webassembly.Mixfile do
 
   def project do
     [app: :webassembly,
-     version: "0.0.1-dev",
+     version: "0.1.0",
      elixir: "~> 0.15.0",
      deps: deps,
      description: description,
