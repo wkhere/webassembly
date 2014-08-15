@@ -9,7 +9,7 @@ defmodule Core do
     require WebAssembly.Types, as: T
 
     defstruct stack: []
-    @type t :: %St{stack: [T.content]}
+    @opaque t :: %St{stack: [T.content]}
 
     @doc """
     Creates new empty state.
