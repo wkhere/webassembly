@@ -1,6 +1,9 @@
 alias WebAssembly.Core
 
 defmodule Core do
+  @moduledoc """
+  Module encapsulating assembly state `WebAssembly.Core.St` and tools around it.
+  """
 
   defmodule St do
     @moduledoc """
