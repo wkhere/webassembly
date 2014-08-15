@@ -48,7 +48,7 @@ defmodule WebAssembly.Tools do
 
     ## Examples
         iex(1)> use WebAssembly
-        nil
+        :ok
         iex(2)> doc = builder do: div do: (span "hey!")
         ["\n<div>", ["\n<span>", "hey!", "</span>"], "</div>"]
         iex(3)> WebAssembly.Tools.Output.flush doc

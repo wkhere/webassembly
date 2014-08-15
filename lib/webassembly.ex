@@ -19,6 +19,7 @@ defmodule WebAssembly do
     quote do
       import WebAssembly.DSL
       use    WebAssembly.HTML
+      :ok
     end
   end
 end
