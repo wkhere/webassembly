@@ -3,7 +3,7 @@ defmodule WebAssembly.DSL do
   require St
 
 
-  defmodule Helpers do
+  defmodule TagChunks do
     import WebAssembly.Tools, only: [htmlize_attrs: 1]
 
     defmacro tag_start(tag, []) do
@@ -44,7 +44,7 @@ defmodule WebAssembly.DSL do
 
   defmacro add_tag!(tagname, attrs, content) do
     quote do
-      import Helpers
+      import TagChunks
       add_val! tag_start(unquote(tagname), unquote(attrs))
       add_val! unquote(content)
       add_val! tag_end(unquote(tagname))
@@ -53,7 +53,7 @@ defmodule WebAssembly.DSL do
 
   defmacro add_tag_void!(tagname, attrs) do
     quote do
-      import Helpers
+      import TagChunks
       add_val! tag_only(unquote(tagname), unquote(attrs))
     end
   end

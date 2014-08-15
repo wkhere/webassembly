@@ -6,7 +6,7 @@ defmodule St.Test do
   import St
 
   def tag(name, content) do
-    import WebAssembly.DSL.Helpers
+    import WebAssembly.DSL.TagChunks
     [tag_start(name,[]), content, tag_end(name)]
   end
 
