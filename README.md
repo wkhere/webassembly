@@ -30,7 +30,7 @@ DSL for creating html structure straight with Elixir blocks:
 ```
 
 This results in a deeply nested list (aka [iolist])
-which you can flatten or send directly to the socket
+which you can flatten or better send to the socket as it is
 (via [Plug] & [Cowboy] for example).
  
 Loosely inspired by [Markaby].
