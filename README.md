@@ -31,3 +31,4 @@ This results in a deeply nested list (aka Erlang iolist)
 which you can flatten or send directly to the socket
 (via Plug & Cowboy for example).
  
+Loosely inspired by [Markaby](https://github.com/markaby/markaby).
