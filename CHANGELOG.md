@@ -1,3 +1,9 @@
+### v0.1.2
+
+More refactorings & typespec fixes.
+
+Preliminary documentation.
+
 ### v0.1.1
 
 Refactoring, typespec fixes and 100% test coverage.
