@@ -155,4 +155,6 @@ defmodule WebAssembly.DSL do
     quote do: add_val! unquote(content)
   end
 
+  def html_nonvoid_tags, do: @html_nonvoid_tags
+  def html_void_tags, do: @html_void_tags
 end
