@@ -25,7 +25,7 @@ defmodule WebAssembly.HTML do
     map svg math
     table caption colgroup tbody thead tfoot tr td th
     form fieldset legend label button select datalist optgroup
-    option textarea ceygen output progress meter
+    option textarea output progress meter
     details summary menuitem menu
     ]a
 
