@@ -29,10 +29,13 @@ DSL for creating html structure straight with Elixir blocks:
     end
 ```
 
-This results in a deeply nested list (aka Erlang iolist)
+This results in a deeply nested list (aka [iolist])
 which you can flatten or send directly to the socket
-(via Plug & Cowboy for example).
+(via [Plug] & [Cowboy] for example).
  
 Loosely inspired by [Markaby].
 
 [markaby]: http://markaby.github.io/
+[plug]:    http://hex.pm/packages/plug
+[cowboy]:  http://hex.pm/packages/cowboy
+[iolist]:  http://www.erlang.org/doc/reference_manual/typespec.html
