@@ -1,6 +1,6 @@
 alias WebAssembly.DSL
 
-defmodule DSL.Test do
+defmodule DSL.LowLevelTest do
   use    ExUnit.Case
   import WebAssembly.TestHelper
   use    DSL
