@@ -3,7 +3,7 @@ defmodule WebAssembly.HTMLMacrosTest do
   #import WebAssembly.TestHelper
   use    WebAssembly
 
-  WebAssembly.HTML.html_void_tags
+  WebAssembly.HTML.void_tags
   |> Enum.each fn tag ->
     test "#{tag} test" do
       doc = builder do: unquote(tag)(class: "foo")
@@ -14,7 +14,7 @@ defmodule WebAssembly.HTMLMacrosTest do
     end
   end
 
-  WebAssembly.HTML.html_nonvoid_tags
+  WebAssembly.HTML.nonvoid_tags
   |> Enum.each fn tag ->
     test "#{tag} test" do
       doc = builder do: unquote(tag)([class: "foo"], "content")

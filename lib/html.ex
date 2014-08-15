@@ -12,7 +12,7 @@ defmodule WebAssembly.HTML do
 
   import WebAssembly.DSL
 
-  @html_nonvoid_tags ~w[
+  @nonvoid_tags ~w[
     head title style
     noscript template
     body section nav article aside h1 h2 h3 h4 h5 h6
@@ -30,24 +30,28 @@ defmodule WebAssembly.HTML do
     ]a
 
   # http://www.w3.org/TR/html5/syntax.html#void-elements
-  @html_void_tags ~w[
+  @void_tags ~w[
     meta link base
     area br col embed hr img input keygen param source track wbr
     ]a
 
-  @html_nonvoid_tags |> Enum.each fn tag ->
+  # macros generation
+
+  @nonvoid_tags |> Enum.each fn tag ->
       defmacro unquote(tag)(attrs\\[], content) do
         t = unquote(tag)
         quote do: tag(unquote(t), unquote(attrs), unquote(content))
       end
     end
 
-  @html_void_tags |> Enum.each fn tag ->
+  @void_tags |> Enum.each fn tag ->
       defmacro unquote(tag)(attrs\\[]) do
         t = unquote(tag)
         quote do: tag_void(unquote(t), unquote(attrs))
       end
     end
+
+  # special cases
 
   defmacro html(attrs\\[], content) do
     quote do
@@ -60,6 +64,8 @@ defmodule WebAssembly.HTML do
     quote do: add_val! unquote(content)
   end
 
-  def html_nonvoid_tags, do: @html_nonvoid_tags
-  def html_void_tags, do: @html_void_tags
+  # meta helpers
+
+  def nonvoid_tags, do: @nonvoid_tags
+  def void_tags, do: @void_tags
 end
