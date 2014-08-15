@@ -122,26 +122,24 @@ defmodule WebAssembly.DSL do
     form fieldset legend label button select datalist optgroup
     option textarea ceygen output progress meter
     details summary menuitem menu
-    ]
+    ]a
 
   # http://www.w3.org/TR/html5/syntax.html#void-elements
   @html_void_tags ~w[
     meta link base
     area br col embed hr img input keygen param source track wbr
-    ]
+    ]a
 
-  @html_nonvoid_tags |> Enum.each fn name ->
-      sym = :"#{name}"
-      defmacro unquote(sym)(attrs\\[], whatever) do
-        t = unquote(sym)
+  @html_nonvoid_tags |> Enum.each fn tag ->
+      defmacro unquote(tag)(attrs\\[], whatever) do
+        t = unquote(tag)
         quote do: tag(unquote(t), unquote(attrs), unquote(whatever))
       end
     end
 
-  @html_void_tags |> Enum.each fn name ->
-      sym = :"#{name}"
-      defmacro unquote(sym)(attrs\\[]) do
-        t = unquote(sym)
+  @html_void_tags |> Enum.each fn tag ->
+      defmacro unquote(tag)(attrs\\[]) do
+        t = unquote(tag)
         quote do: tag_void(unquote(t), unquote(attrs))
       end
     end
