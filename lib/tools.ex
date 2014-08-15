@@ -1,5 +1,5 @@
 defmodule WebAssembly.Tools do
-  alias WebAssembly.Core.Types, as: T
+  alias WebAssembly.Types, as: T
 
   @spec htmlize_attrs(T.attrs) :: [String.t]
 
