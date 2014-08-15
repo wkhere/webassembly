@@ -47,6 +47,18 @@ defmodule DSL.LowLevelTest do
        "</foo>", "simple text 2"]
   end
 
+  test "attributes" do
+    buf = builder do
+      tag :foo, class: "highclass", id: 42 do
+        span [style: "dotted"], "good morning"
+      end
+    end
+    assert buf ==
+      [["<foo ", [~s/class="highclass"/, " ", ~s/id="42"/], ">"],
+       [["<span ", [~s/style="dotted"/], ">"], "good morning", "</span>"],
+       "</foo>"]
+  end
+
   test "void tags" do
     buf = builder do
       tag_void :foo
