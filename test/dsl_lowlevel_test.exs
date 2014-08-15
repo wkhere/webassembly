@@ -5,8 +5,6 @@ defmodule DSL.LowLevelTest do
   import WebAssembly.TestHelper
   import DSL
 
-  # testing only primitives here
-
   test "basic builder" do
     buf = builder do
       add_val! :x
