@@ -1,6 +1,7 @@
 WebAssembly
 ===========
 [![Build Status](https://travis-ci.org/herenowcoder/webassembly.svg?branch=master)](https://travis-ci.org/herenowcoder/webassembly)
+[![Coverage Status](https://img.shields.io/coveralls/herenowcoder/webassembly.svg)](https://coveralls.io/r/herenowcoder/webassembly)
 
 DSL for creating html structure straight with Elixir blocks:
 
