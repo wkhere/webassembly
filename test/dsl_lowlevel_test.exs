@@ -3,7 +3,7 @@ alias WebAssembly.DSL
 defmodule DSL.LowLevelTest do
   use    ExUnit.Case
   import WebAssembly.TestHelper
-  use    DSL
+  import DSL
 
   # testing only primitives here
 
@@ -50,7 +50,7 @@ defmodule DSL.LowLevelTest do
   test "attributes" do
     buf = builder do
       tag :foo, class: "highclass", id: 42 do
-        span [style: "dotted"], "good morning"
+        tag :span, [style: "dotted"], "good morning"
       end
     end
     assert buf ==
