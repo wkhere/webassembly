@@ -15,12 +15,13 @@ DSL for creating html structure straight with Elixir blocks:
         end
         body do
           div class: "mydiv" do
-            if all_goes_well do
-              text "ok"
-            else
-              text "bad"
+            ul do
+              li 1
+              if all_goes_well, do:
+                li "second"
             end
           end
+          text "that was nice"
         end
       end
     end

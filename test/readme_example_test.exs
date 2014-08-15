@@ -15,12 +15,13 @@ defmodule WebAssembly.ReadmeExample.Test do
         end
         body do
           div class: "mydiv" do
-            if all_goes_well do
-              text "ok"
-            else
-              text "bad"
+            ul do
+              li 1
+              if all_goes_well, do:
+                li "second"
             end
           end
+          text "that was nice"
         end
       end
     end
@@ -32,8 +33,12 @@ defmodule WebAssembly.ReadmeExample.Test do
       </head>
       <body>
         <div class="mydiv">
-          ok
+          <ul>
+            <li>1</li>
+            <li>second</li>
+          </ul>
         </div>
+        that was nice
       </body>
     </html>
     """
