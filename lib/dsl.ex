@@ -107,7 +107,7 @@ defmodule WebAssembly.DSL do
   # todo: somehow prevent from span(span("a"))
 
 
-  ~w[
+  @html_nonvoid_tags ~w[
     head title style
     noscript template
     body section nav article aside h1 h2 h3 h4 h5 h6
@@ -122,7 +122,15 @@ defmodule WebAssembly.DSL do
     form fieldset legend label button select datalist optgroup
     option textarea ceygen output progress meter
     details summary menuitem menu
-    ] |> Enum.each fn name ->
+    ]
+
+  # http://www.w3.org/TR/html5/syntax.html#void-elements
+  @html_void_tags ~w[
+    meta link base
+    area br col embed hr img input keygen param source track wbr
+    ]
+
+  @html_nonvoid_tags |> Enum.each fn name ->
       sym = :"#{name}"
       defmacro unquote(sym)(attrs\\[], whatever) do
         t = unquote(sym)
@@ -130,11 +138,7 @@ defmodule WebAssembly.DSL do
       end
     end
 
-  # http://www.w3.org/TR/html5/syntax.html#void-elements
-  ~w[
-    meta link base
-    area br col embed hr img input keygen param source track wbr
-    ] |> Enum.each fn name ->
+  @html_void_tags |> Enum.each fn name ->
       sym = :"#{name}"
       defmacro unquote(sym)(attrs\\[]) do
         t = unquote(sym)
