@@ -12,12 +12,12 @@ defmodule Core do
     def new, do: %__MODULE__{}
 
     @spec push(t, T.content) :: t
-    def push(st = %{stack: s}, elem) do
-      %{st | stack: [elem|s]}
+    def push(%{stack: s} = state, elem) do
+      %{state | stack: [elem|s]}
     end
 
     @spec release(t) :: [T.content]
-    def release(%{stack: s}), do: Enum.reverse(s)
+    def release(%{stack: s} = _state), do: Enum.reverse(s)
   end
 
 end
