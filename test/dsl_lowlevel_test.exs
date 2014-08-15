@@ -16,14 +16,14 @@ defmodule DSL.LowLevelTest do
     assert buf == [:x, :y]
   end
 
-  test "builder with one content tag" do
+  test "one content tag" do
     buf = builder do
       tag :foo, "content"
     end
     assert buf == ["<foo>", "content", "</foo>"]
   end
 
-  test "builder with nested content tags" do
+  test "nested content tags" do
     buf = builder do
       tag :foo do
         tag :bar, "content"
@@ -32,7 +32,7 @@ defmodule DSL.LowLevelTest do
     assert buf == ["<foo>", ["<bar>", "content", "</bar>"], "</foo>"]
   end
 
-  test "builder with nested content tags and some siblings" do
+  test "nested content tags and some siblings" do
     buf = builder do
       add_val! "simple text 1"
       tag :foo do
@@ -47,7 +47,7 @@ defmodule DSL.LowLevelTest do
        "</foo>", "simple text 2"]
   end
 
-  test "builder with void tags" do
+  test "void tags" do
     buf = builder do
       tag_void :foo
       tag_void :bar, class: "high"
