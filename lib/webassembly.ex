@@ -9,7 +9,7 @@ defmodule WebAssembly do
 
       use WebAssembly
       builder do
-        div "mydiv" do
+        div class: "mydiv" do
           #...
         end
       end
