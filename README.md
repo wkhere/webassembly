@@ -40,7 +40,7 @@ which you can flatten or (better!) send to the socket as it is
 Now what can be concluded from the example above:
 
 * you produce HTML elements by using macros inside `builder` block
-* every element can be used with "flat" content argument or with a `do`-block
+* [non-void] element can be used with "flat" content argument or with a `do`-block
 * element with a `do`-block means nesting
 * inside such a `do`-block you have access to **full Elixir syntax**
 * element attributes go first (but are optional), then the content
@@ -84,4 +84,5 @@ The code is released under the BSD 2-Clause License.
 [iolist]:  http://www.erlang.org/doc/reference_manual/typespec.html
 [hex]:     http://hex.pm
 [void]:    http://www.w3.org/TR/html5/syntax.html#void-elements
+[non-void]: http://www.w3.org/TR/html-markup/syntax.html#elements-html-syntax-list
 [test coverage]: https://coveralls.io/r/herenowcoder/webassembly
