@@ -34,7 +34,7 @@ DSL for creating html structure straight with Elixir blocks:
 ```
 
 This results in a deeply nested list (aka [iolist])
-which you can flatten or better send to the socket as it is
+which you can flatten or (better!) send to the socket as it is
 (via [Plug] & [Cowboy] for example).
 
 Now what can be concluded from an example above:
@@ -50,7 +50,7 @@ Now what can be concluded from an example above:
   but not when using flat form
 * [void] HTML elements correspond to macros with only attributes
   and no content argument, like `meta` above
-* if you want to emit just text without surrounding html tag,
+* if you want to emit just text without surrounding html tags,
   simply use `text` macro.
 
 Isn't it beautiful? For me it is..
