@@ -50,13 +50,16 @@ defmodule Core do
     @moduledoc """
       Mutability wrapper around `WebAssembly.Core.St`.
 
+      Corresponds to the inner content of currently assembled
+      element.
+
       Internally uses `Agent`s.
     """
 
     @doc """
     Creates new mutable scope to hold the state of elements assembly.
 
-    Returns `pid` one can operate on.
+    Returns `pid` of the underlying Agent one can operate on.
     """
     @spec new!() :: pid
     def new! do
