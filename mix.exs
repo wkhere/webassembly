@@ -21,17 +21,21 @@ defmodule WebAssembly.Mixfile do
   end
 
   defp description do
-    """
+    ~S"""
     WebAssembly is a web DSL for Elixir.
 
     You create html structure straight using do blocks.
     Means, you can intermix html-building blocks with full Elixir syntax:
 
-        div class: "mydiv" do
-          ul do
-            li 1
-            if all_goes_well, do:
-              li "second"
+        div class: "container" do
+          n = get_the_size
+          if n > 1 do
+            ul do
+              for index <- 1..n, do:
+                li "item #{index}"
+            end
+          else
+            span "got only one item"
           end
         end
 
