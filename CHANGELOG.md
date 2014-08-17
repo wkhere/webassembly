@@ -1,6 +1,7 @@
 ### v0.3.0-dev
 
 * API simplified: `elements`/`pick` not needed anymore
+* `flush/1` is imported when using the main module
 
 ### v0.2.0
 

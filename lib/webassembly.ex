@@ -19,6 +19,7 @@ defmodule WebAssembly do
     quote do
       import WebAssembly.DSL
       use    WebAssembly.HTML
+      import WebAssembly.Tools.Output, only: [flush: 1]
       :ok
     end
   end
