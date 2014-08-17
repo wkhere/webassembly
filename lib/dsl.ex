@@ -90,7 +90,7 @@ defmodule WebAssembly.DSL do
     quote do: add_tag_void!(unquote(tagname), unquote(attrs))
   end
 
-  # pick / gather for loops & closures
+  # unrolling loops & closures
 
   defmacro pick(expr) do
     quote do
@@ -99,7 +99,7 @@ defmodule WebAssembly.DSL do
     end
   end
 
-  defmacro gather(new_scope_expr) do
+  defmacro elements(new_scope_expr) do
     quote do
       inner_content = case unquote(new_scope_expr) do
         states when is_list(states) ->

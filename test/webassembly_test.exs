@@ -56,10 +56,10 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  test "gather/pick with a list comprehension" do
+  test "unrolling list comprehension" do
     buf = builder do
       ul do
-        gather for x <- 1..2, do: pick li "#{x}"
+        elements for x <- 1..2, do: pick li "#{x}"
       end
     end
     assert buf |> flush == """
@@ -71,10 +71,10 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  test "gather/pick with Enum.map" do
+  test "unrolling Enum.map" do
     buf = builder do
       ul do
-        gather Enum.map 1..2, &(pick li "#{&1}")
+        elements Enum.map 1..2, &(pick li "#{&1}")
       end
     end
     assert buf |> flush == """
@@ -86,9 +86,9 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  test "gather/pick with a closure" do
+  test "unrolling a closure" do
     buf = builder do
-      gather (fn -> pick span "foo" end).()
+      elements (fn -> pick span "foo" end).()
     end
     assert buf |> flush == "<span>foo</span>"
   end
