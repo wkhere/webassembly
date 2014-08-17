@@ -52,6 +52,13 @@ Now what can be concluded from an example above:
 
 Isn't it beautiful? For me it is..
 
+## Usage
+
+WebAssembly is on [Hex], so just add `{:webassembly, "~> 0.2"}` to your deps
+and `:webassembly` to your apps in the `mix.exs`.
+
+More examples to come - like, how to blend it with [Plug] & stuff..
+
 ## Thanks
 
 Loosely inspired by [Markaby].
@@ -64,3 +71,4 @@ The code is released under the BSD 2-Clause License.
 [plug]:    http://hex.pm/packages/plug
 [cowboy]:  http://hex.pm/packages/cowboy
 [iolist]:  http://www.erlang.org/doc/reference_manual/typespec.html
+[hex]:     http://hex.pm
