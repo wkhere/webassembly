@@ -48,8 +48,8 @@ Now what can be concluded from the example above:
 * underscores in attribute keys are translated to dash signs
 * you can omit brackets around attributes when using `do`-block,
   but not when using flat form
-* [void] HTML elements correspond to macros with only attributes
-  and no content argument, like `meta` above
+* [void] HTML elements correspond to macros with attributes only,
+  like `meta` above
 * if you want to emit just text without surrounding html tags,
   simply use `text` macro.
 
