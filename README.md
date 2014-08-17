@@ -48,7 +48,8 @@ Now what can be concluded from an example above:
 * underscores in attribute keys are translated to dash signs
 * you can omit brackets around attributes when using `do`-block,
   but not when using flat form
-* if you want to emit just text without any html tag, just use `text`.
+* if you want to emit just text without surrounding html tag,
+  simply use `text` macro.
 
 Isn't it beautiful? For me it is..
 
