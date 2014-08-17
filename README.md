@@ -59,6 +59,7 @@ Isn't it beautiful? For me it is..
 
 * to have views in pure Elixir, without HTML templates
 * to utilize Erlang's approach: you can feed sockets with iolists
+  instead of one big binary produced by template engine
 
 You can possibly mix different styles: code small snippets in
 WebAssembly and feed them to your partial templates, finally using
