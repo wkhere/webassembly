@@ -1,4 +1,4 @@
-### v0.3.0-dev
+### v0.3.0
 
 * API simplified: `elements`/`pick` not needed anymore
 * better docs

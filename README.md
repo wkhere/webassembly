@@ -57,7 +57,7 @@ Isn't it beautiful? For me it is..
 
 ## Usage
 
-WebAssembly is on [Hex], so just add `{:webassembly, "~> 0.2"}` to your deps
+WebAssembly is on [Hex], so just add `{:webassembly, "~> 0.3.0"}` to your deps
 and `:webassembly` to your apps in the `mix.exs`.
 
 More examples to come - like, how to blend it with [Plug] & stuff..
