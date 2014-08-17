@@ -36,7 +36,13 @@ This results in a deeply nested list (aka [iolist])
 which you can flatten or better send to the socket as it is
 (via [Plug] & [Cowboy] for example).
 
+## Thanks
+
 Loosely inspired by [Markaby].
+
+## License
+
+The code is released under the BSD 2-Clause License.
 
 [markaby]: http://markaby.github.io/
 [plug]:    http://hex.pm/packages/plug
