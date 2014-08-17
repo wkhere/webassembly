@@ -2,23 +2,23 @@ defmodule WebAssembly.Examples do
   # needed to have examples as a separate module
   # to trigger dialyzer analysis of core & dsl
 
-  defp all_goes_well, do: true
-
   def readme_ex do
     use WebAssembly
     builder do
       html do
         head do
-          ctype = "text/html"
-          meta http_equiv: "Content-Type", content: ctype
-          title "foo"
+          meta http_equiv: "Content-Type", content: "text/html"
+          title "example"
         end
         body do
-          div class: "mydiv", id: :myid do
+          div class: "container", id: :content do
             ul do
-              li 1
-              if all_goes_well, do:
-                li "second"
+              elements for index<-1..5, do:
+                pick li ["item ", index]
+            end
+            random = :random.uniform(10)
+            if random == 10 do
+              text "Lucky! You got 10"
             end
           end
           text "that was nice"

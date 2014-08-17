@@ -8,13 +8,16 @@ defmodule WebAssembly.ReadmeExample.Test do
     <!DOCTYPE html><html>
       <head>
         <meta http-equiv="Content-Type" content="text/html" />
-        <title>foo</title>
+        <title>example</title>
       </head>
       <body>
-        <div class="mydiv" id="myid">
+        <div class="container" id="content">
           <ul>
-            <li>1</li>
-            <li>second</li>
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+            <li>item 4</li>
+            <li>item 5</li>
           </ul>
         </div>
         that was nice
