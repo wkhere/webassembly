@@ -136,9 +136,8 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  #  test "case of span(span :foo)" do
-  #    assert_raise ArgumentError, fn -> builder do: span(pick span :foo) end
-  #    # here `pick` is only to prevent from compilation warning on unused st var
-  #    # the pathological case stays the same as if there was no `pick`
-  #  end
+  test "case of span(span :foo)" do
+    # this is a pathological case when one should open new block but didn't
+    assert_raise ArgumentError, fn -> builder do: span(span :foo) end
+   end
 end

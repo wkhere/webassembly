@@ -31,9 +31,6 @@ defmodule Core do
     Pushes `value` into the `state`, returning a new one.
     """
     @spec push(t, T.content) :: t
-    def push(_, %__MODULE__{} = value) do
-      raise ArgumentError, "cant push state as a value: #{inspect value}"
-    end
     def push(%{stack: s} = state, value) do
       %{state | stack: [value|s]}
     end
@@ -69,11 +66,20 @@ defmodule Core do
 
     @doc """
     Pushes a `value` into the assembly scope given by `pid`.
+
+    Returns changed internal state.
     """
-    @spec push!(pid, T.content) :: :ok
+    @spec push!(pid, T.content) :: St.t
+    def push!(pid, value)
+
+    def push!(_, %St{} = value) do
+      raise ArgumentError, "cant push state as a value: #{inspect value}"
+      # todo: try to detect pathological situation by other means
+    end
     def push!(pid, value) do
-      Agent.update(pid, fn st0 ->
-        St.push(st0, value)
+      Agent.get_and_update(pid, fn st0 ->
+        st = St.push(st0, value)
+        {st, st}
       end)
     end
 
