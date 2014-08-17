@@ -22,8 +22,8 @@ DSL for creating html structure straight with Elixir blocks:
                 pick li ["item ", index]
             end
             random = :random.uniform(10)
-            if random == 10 do
-              text "Lucky! You got 10"
+            if random == 5 do
+              text "Lucky! You got five"
             end
           end
           text "that was nice"
