@@ -1,5 +1,6 @@
-### v0.2.1-dev
+### v0.3.0-dev
 
+* API simplified: `elements`/`pick` not needed anymore
 
 ### v0.2.0
 
