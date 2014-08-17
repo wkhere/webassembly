@@ -1,3 +1,9 @@
+### v0.2.0-dev
+
+* API change: loops & closures unrolling now via `elements`/`pick` macros
+* defensive measure against improper nesting without do: block
+* small doc & tests improvements
+
 ### v0.1.2
 
 * More refactorings & typespec fixes
