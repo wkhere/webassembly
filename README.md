@@ -23,7 +23,7 @@ DSL for creating html structure straight with Elixir blocks:
             end
             random = :random.uniform(10)
             if random == 5 do
-              span "Lucky! You got five"
+              text "Lucky! You got five"
             end
           end
           span [style: "smiling"], "that was nice"

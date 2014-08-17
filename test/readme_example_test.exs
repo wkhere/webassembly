@@ -19,7 +19,7 @@ defmodule WebAssembly.ReadmeExample.Test do
             <li>item 4</li>
             <li>item 5</li>
           </ul>
-          <span>Lucky! You got five</span>
+          Lucky! You got five
         </div>
         <span style="smiling">that was nice</span>
       </body>
