@@ -39,8 +39,8 @@ which you can flatten or better send to the socket as it is
 
 Now what can be concluded from an example above:
 
-* you have access to HTML macros inside `builder` block
-* HTML macro can be used with flat content or with a `do`-block
+* you produce HTML element by using macros inside `builder` block
+* such HTML macro can be used with "flat" content argument or with a `do`-block
 * element with a `do`-block means nesting
 * inside such a `do`-block you have access to **full Elixir syntax**
 * if element has attributes they go first (but are optional), then the content
