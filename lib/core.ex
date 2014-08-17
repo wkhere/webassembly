@@ -7,15 +7,15 @@ defmodule Core do
   Consists of two parts:
 
   * `WebAssembly.Core.St` - a functional state of markup in the current block
-  * `WebAssembly.Core.Scope` - a wrapper around state above, allowing for
-    mutable operation on it
+  * `WebAssembly.Core.Scope` - a wrapper around functional state, allowing for
+    mutable operations on it
   """
   require WebAssembly.Types, as: T
 
 
   defmodule St do
     @moduledoc """
-    State of markup assembly in the current block.
+    Pure-functional state of markup assembly in the current block.
     """
 
     defstruct stack: []
@@ -28,7 +28,7 @@ defmodule Core do
     def new, do: %__MODULE__{}
 
     @doc """
-    Pushes `value` into the `state`.
+    Pushes `value` into the `state`, returning a new one.
     """
     @spec push(t, T.content) :: t
     def push(_, %__MODULE__{} = value) do
