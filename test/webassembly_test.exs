@@ -71,6 +71,30 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
+  test "unrolling list with do-blocks inside" do
+    buf = builder do
+      div class: "outer" do
+        for x <- 1..2 do
+          div class: "inner" do
+            span x
+          end |> pick
+        end |> elements
+        #   ^^ugly..
+      end
+    end
+    assert buf |> flush == """
+      <div class="outer">
+        <div class="inner">
+          <span>1</span>
+        </div>
+        <div class="inner">
+          <span>2</span>
+        </div>
+      </div>
+    """
+    |> no_indent |> no_lf
+  end
+
   test "unrolling Enum.map" do
     buf = builder do
       ul do
