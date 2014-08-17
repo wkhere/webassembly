@@ -5,8 +5,8 @@ defmodule WebAssembly.DSL do
   Tag blocks can be intermixed with regular Elixir syntax.
   """
 
-  alias   WebAssembly.Core.St
-  require St
+  alias   WebAssembly.Core.Scope
+  require Scope
 
 
   defmodule TagChunks do
@@ -38,7 +38,7 @@ defmodule WebAssembly.DSL do
 
   defmacro add_val!(v) do
     quote do
-      var!(st) = var!(st) |> St.push(unquote(v))
+      var!(scope!) |> Scope.push(unquote(v))
     end
   end
 
@@ -65,20 +65,23 @@ defmodule WebAssembly.DSL do
 
   defmacro builder(do: body) do
     quote do
-      alias WebAssembly.Core.St
-      var!(st) = St.new
-      unquote(body)
-      St.release(var!(st))
+      fn ->
+        alias WebAssembly.Core.Scope
+        var!(scope!) = Scope.new!
+        unquote(body)
+        Scope.release(var!(scope!))
+      end.()
     end
+      # the fn above is crucial -> it introduces new lexical
+      # scope, so our `scope!` var doesn't gets overwritten
   end
 
   defmacro tag(tagname, attrs\\[], rest)
 
   defmacro tag(tagname, attrs, do: body) do
     quote do
-      add_tag!(unquote(tagname), unquote(attrs), fn ->
-        builder do: unquote(body)
-      end.())
+      add_tag!(unquote(tagname), unquote(attrs),
+        builder do: unquote(body))
     end
   end
 
@@ -92,23 +95,23 @@ defmodule WebAssembly.DSL do
 
   # unrolling loops & closures
 
-  defmacro pick(expr) do
-    quote do
-      unquote(expr)
-      var!(st)
-    end
-  end
+  #defmacro pick(expr) do
+  #  quote do
+  #    unquote(expr)
+  #    var!(st)
+  #  end
+  #end
 
-  defmacro elements(new_scope_expr) do
-    quote do
-      inner_content = case unquote(new_scope_expr) do
-        states when is_list(states) ->
-          for st=%St{} <- states, do: St.release(st)
-        st=%St{} ->
-          St.release(st)
-      end
-      add_val! inner_content
-    end
-  end
+  #  defmacro elements(new_scope_expr) do
+  #    quote do
+  #      inner_content = case unquote(new_scope_expr) do
+  #        states when is_list(states) ->
+  #          for st=%St{} <- states, do: St.release(st)
+  #        st=%St{} ->
+  #          St.release(st)
+  #      end
+  #      add_val! inner_content
+  #    end
+  #  end
 
 end

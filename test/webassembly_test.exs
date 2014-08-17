@@ -56,10 +56,10 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  test "unrolling list comprehension" do
+  test "loop" do
     buf = builder do
       ul do
-        elements for x <- 1..2, do: pick li "#{x}"
+        for x <- 1..2, do: li "#{x}"
       end
     end
     assert buf |> flush == """
@@ -71,15 +71,14 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  test "unrolling list with do-blocks inside" do
+  test "loop with do-blocks inside" do
     buf = builder do
       div class: "outer" do
         for x <- 1..2 do
           div class: "inner" do
             span x
-          end |> pick
-        end |> elements
-        #   ^^ugly..
+          end
+        end
       end
     end
     assert buf |> flush == """
@@ -95,10 +94,10 @@ defmodule WebAssembly.Test do
     |> no_indent |> no_lf
   end
 
-  test "unrolling Enum.map" do
+  test "loop via Enum" do
     buf = builder do
       ul do
-        elements Enum.map 1..2, &(pick li "#{&1}")
+        Enum.map 1..2, &(li &1)
       end
     end
     assert buf |> flush == """
@@ -110,9 +109,9 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  test "unrolling a closure" do
+  test "closure" do
     buf = builder do
-      elements (fn -> pick span "foo" end).()
+      fn -> span "foo" end.()
     end
     assert buf |> flush == "<span>foo</span>"
   end
@@ -137,9 +136,9 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  test "case of span(span :foo)" do
-    assert_raise ArgumentError, fn -> builder do: span(pick span :foo) end
-    # here `pick` is only to prevent from compilation warning on unused st var
-    # the pathological case stays the same as if there was no `pick`
-  end
+  #  test "case of span(span :foo)" do
+  #    assert_raise ArgumentError, fn -> builder do: span(pick span :foo) end
+  #    # here `pick` is only to prevent from compilation warning on unused st var
+  #    # the pathological case stays the same as if there was no `pick`
+  #  end
 end

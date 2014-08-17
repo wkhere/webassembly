@@ -18,8 +18,8 @@ DSL for creating html structure straight with Elixir blocks:
         body do
           div class: "container", id: :content do
             ul do
-              elements for index<-1..5, do:
-                pick li ["item ", index]
+              for index<-1..5, do:
+                li ["item ", index]
             end
             random = :random.uniform(10)
             if random == 5 do
@@ -36,9 +36,6 @@ This results in a deeply nested list (aka [iolist])
 which you can flatten or better send to the socket as it is
 (via [Plug] & [Cowboy] for example).
 
-Please note this is experimental - esp. the use of `elements`/`pick`
-for unrolling the loops can change in the future.
- 
 Loosely inspired by [Markaby].
 
 [markaby]: http://markaby.github.io/
