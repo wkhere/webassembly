@@ -66,6 +66,10 @@ More examples to come - like, how to blend it with [Plug] & stuff..
 
 WebAssembly aims to have 100% [test coverage].
 
+## Type Safety
+
+As for `0.3.0` WebAssembly dialyzes with no warnings.
+
 ## Thanks
 
 Loosely inspired by [Markaby].
