@@ -103,7 +103,7 @@ defmodule WebAssembly.DSL do
     quote do
       inner_content = case unquote(new_scope_expr) do
         states when is_list(states) ->
-          states |> Enum.map fn st=%St{} -> St.release(st) end
+          for st=%St{} <- states, do: St.release(st)
         st=%St{} ->
           St.release(st)
       end
