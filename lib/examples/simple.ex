@@ -18,10 +18,10 @@ defmodule WebAssembly.Examples do
             end
             random = :random.uniform(10)
             if random == 5 do
-              text "Lucky! You got five"
+              span "Lucky! You got five"
             end
           end
-          text "that was nice"
+          span [style: "smiling"], "that was nice"
         end
       end
     end

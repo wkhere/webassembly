@@ -19,9 +19,9 @@ defmodule WebAssembly.ReadmeExample.Test do
             <li>item 4</li>
             <li>item 5</li>
           </ul>
-          Lucky! You got five
+          <span>Lucky! You got five</span>
         </div>
-        that was nice
+        <span style="smiling">that was nice</span>
       </body>
     </html>
     """
