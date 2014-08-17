@@ -13,7 +13,7 @@ defmodule WebAssembly.Examples do
         body do
           div class: "container", id: :content do
             ul do
-              for index<-1..5, do:
+              for index <- 1..3, do:
                 li "item #{index}"
             end
             random = :random.uniform(10)
