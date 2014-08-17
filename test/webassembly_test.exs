@@ -7,13 +7,13 @@ defmodule WebAssembly.Test do
   doctest WebAssembly.Tools.Output
 
   test "mixed level tags/text, no single enclosing element" do
-    buf = builder do
+    doc = builder do
       div "foo"
       div do
         span "bar"
       end
     end
-    assert buf |> flush == """
+    assert doc |> flush == """
       <div>foo</div>
       <div>
         <span>bar</span>
@@ -23,7 +23,7 @@ defmodule WebAssembly.Test do
   end
 
   test "more variations of tags w/ enclosing html element" do
-    buf = builder do
+    doc = builder do
       html do
         head do
           meta http_equiv: "Content-Type", content: "text/html"
@@ -38,7 +38,7 @@ defmodule WebAssembly.Test do
         end
       end
     end
-    assert buf  |> flush == """
+    assert doc  |> flush == """
       <!DOCTYPE html><html>
         <head>
           <meta http-equiv="Content-Type" content="text/html" />
@@ -57,12 +57,12 @@ defmodule WebAssembly.Test do
   end
 
   test "loop" do
-    buf = builder do
+    doc = builder do
       ul do
         for x <- 1..2, do: li "#{x}"
       end
     end
-    assert buf |> flush == """
+    assert doc |> flush == """
       <ul>
         <li>1</li>
         <li>2</li>
@@ -72,7 +72,7 @@ defmodule WebAssembly.Test do
   end
 
   test "loop with do-blocks inside" do
-    buf = builder do
+    doc = builder do
       div class: "outer" do
         for x <- 1..2 do
           div class: "inner" do
@@ -81,7 +81,7 @@ defmodule WebAssembly.Test do
         end
       end
     end
-    assert buf |> flush == """
+    assert doc |> flush == """
       <div class="outer">
         <div class="inner">
           <span>1</span>
@@ -95,12 +95,12 @@ defmodule WebAssembly.Test do
   end
 
   test "loop via Enum" do
-    buf = builder do
+    doc = builder do
       ul do
         Enum.map 1..2, &(li &1)
       end
     end
-    assert buf |> flush == """
+    assert doc |> flush == """
       <ul>
         <li>1</li>
         <li>2</li>
@@ -110,21 +110,21 @@ defmodule WebAssembly.Test do
   end
 
   test "closure" do
-    buf = builder do
+    doc = builder do
       fn -> span "foo" end.()
     end
-    assert buf |> flush == "<span>foo</span>"
+    assert doc |> flush == "<span>foo</span>"
   end
 
   test "attrs" do
-    buf = builder do
+    doc = builder do
       span [class: "hilight"], "foo"
       div id: :matrix, class: "shiny" do
         text "heyy!"
         span [style: "outline: 1px"], "are you in matrix?"
       end
     end
-    assert buf |> flush == """
+    assert doc |> flush == """
       <span class="hilight">foo</span>
       <div id="matrix" class="shiny">
         heyy!
