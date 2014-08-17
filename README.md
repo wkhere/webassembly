@@ -55,6 +55,15 @@ Now what can be concluded from the example above:
 
 Isn't it beautiful? For me it is..
 
+## Why?
+
+* to have views in pure Elixir, without HTML templates
+* to utilize Erlang's approach: you can feed sockets with iolists
+
+You can possibly mix different styles: code small snippets in
+WebAssembly and feed them to your partial templates, finally using
+your template engine to render the whole page.
+
 ## Usage
 
 WebAssembly is on [Hex], so just add `{:webassembly, "~> 0.3.0"}` to your deps
