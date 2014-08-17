@@ -5,6 +5,7 @@ defmodule Core do
   Core of the markup assembly.
 
   Consists of two parts:
+
   * `WebAssembly.Core.St` - a functional state of markup in the current block
   * `WebAssembly.Core.Scope` - a wrapper around state above, allowing for
     mutable operation on it
