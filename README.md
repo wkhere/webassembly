@@ -48,6 +48,8 @@ Now what can be concluded from an example above:
 * underscores in attribute keys are translated to dash signs
 * you can omit brackets around attributes when using `do`-block,
   but not when using flat form
+* [void] HTML elements correspond to macros with only attributes
+  and no content argument, like `meta` above
 * if you want to emit just text without surrounding html tag,
   simply use `text` macro.
 
@@ -73,3 +75,4 @@ The code is released under the BSD 2-Clause License.
 [cowboy]:  http://hex.pm/packages/cowboy
 [iolist]:  http://www.erlang.org/doc/reference_manual/typespec.html
 [hex]:     http://hex.pm
+[void]:    http://www.w3.org/TR/html5/syntax.html#void-elements
