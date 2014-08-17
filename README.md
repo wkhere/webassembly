@@ -37,7 +37,7 @@ This results in a deeply nested list (aka [iolist])
 which you can flatten or (better!) send to the socket as it is
 (via [Plug] & [Cowboy] for example).
 
-Now what can be concluded from an example above:
+Now what can be concluded from the example above:
 
 * you produce HTML elements by using macros inside `builder` block
 * every element can be used with "flat" content argument or with a `do`-block
