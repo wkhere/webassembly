@@ -93,25 +93,4 @@ defmodule WebAssembly.DSL do
     quote do: add_tag_void!(unquote(tagname), unquote(attrs))
   end
 
-  # unrolling loops & closures
-
-  #defmacro pick(expr) do
-  #  quote do
-  #    unquote(expr)
-  #    var!(st)
-  #  end
-  #end
-
-  #  defmacro elements(new_scope_expr) do
-  #    quote do
-  #      inner_content = case unquote(new_scope_expr) do
-  #        states when is_list(states) ->
-  #          for st=%St{} <- states, do: St.release(st)
-  #        st=%St{} ->
-  #          St.release(st)
-  #      end
-  #      add_val! inner_content
-  #    end
-  #  end
-
 end
