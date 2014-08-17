@@ -2,6 +2,9 @@ defmodule WebAssembly.Examples do
   # needed to have examples as a separate module
   # to trigger dialyzer analysis of core & dsl
 
+  alias WebAssembly.Types, as: T
+
+  @spec readme_ex :: T.assembled_elements
   def readme_ex do
     use WebAssembly
     builder do
@@ -27,4 +30,11 @@ defmodule WebAssembly.Examples do
     end
   end
 
+
+  import WebAssembly.Tools.Output
+
+  @spec readme_ex_flushed :: binary
+  def readme_ex_flushed do
+    readme_ex |> flush
+  end
 end

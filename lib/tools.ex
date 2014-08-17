@@ -17,16 +17,16 @@ defmodule WebAssembly.Tools do
     Underscores in key names are turned into dash signs.
 
     ## Examples
-        iex> WebAssembly.Tools.Input.htmlize_attrs(class: "light", id: :myid)
+        iex> WebAssembly.Tools.Input.htmlize_attributes(class: "light", id: :myid)
         ["class=\"light\"", " ", "id=\"myid\""]
 
-        iex> WebAssembly.Tools.Input.htmlize_attrs(http_equiv: "Content-Type")
+        iex> WebAssembly.Tools.Input.htmlize_attributes(http_equiv: "Content-Type")
         ["http-equiv=\"Content-Type\""]
     """
 
-    @spec htmlize_attrs(T.attrs) :: [String.t]
+    @spec htmlize_attributes(T.attributes) :: T.assembled_attributes
 
-    def htmlize_attrs(attrs) do
+    def htmlize_attributes(attrs) do
       Enum.map(attrs, fn {k,v} ->
       k = k |> to_string |> String.replace("_", "-")
         ~s/#{k}="#{v}"/
@@ -39,12 +39,12 @@ defmodule WebAssembly.Tools do
   defmodule Output do
 
     @doc ~S"""
-    Flush nested list of tag fragments into a flat string.
+    Flush nested list of HTML elements into a flat string.
 
-    Flushing is not needed when you pass tag fragments
+    Flushing is not needed when you pass deep list of elements
     directly to Plug. Still it may come handy when testing,
     prototyping or using WebAssembly output together with
-    web views based on templates.
+    template-based views.
 
     ## Examples
         iex(1)> use WebAssembly
@@ -55,7 +55,7 @@ defmodule WebAssembly.Tools do
         "\n<div>\n<span>hey!</span></div>"
     """
 
-    @spec flush(T.out_tag) :: String.t
+    @spec flush(T.assembled_elements) :: binary
 
     def flush(chunks) when is_list(chunks) do
       chunks |> List.flatten |> Enum.join

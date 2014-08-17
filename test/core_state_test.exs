@@ -5,8 +5,8 @@ defmodule St.Test do
   import WebAssembly.TestHelper
   import St
 
-  def tag(name, content) do
-    import WebAssembly.DSL.TagChunks
+  def element(name, content) do
+    import WebAssembly.DSL.Tags
     [tag_start(name,[]), content, tag_end(name)]
   end
 
@@ -22,15 +22,15 @@ defmodule St.Test do
     assert ( new |> push(1) |> push(2) |> release ) == [1,2]
   end
 
-  test "push one tag" do
-    assert new |> push(tag(:foo, "bar")) |> release |> flush
+  test "push one element" do
+    assert new |> push(element(:foo, "bar")) |> release |> flush
       == "<foo>bar</foo>"
   end
 
-  test "push two tags" do
+  test "push two elements" do
     assert new
-      |> push(tag(:foo, "1"))
-      |> push(tag(:bar, "2"))
+      |> push(element(:foo, "1"))
+      |> push(element(:bar, "2"))
       |> release
       |> flush
       == """
@@ -39,14 +39,14 @@ defmodule St.Test do
       """ |> no_indent |> no_lf
   end
 
-  test "push two tags nested and a third sister to first" do
+  test "push two elements nested and a third sister to first" do
     assert new
-      |> push(tag(:foo,
+      |> push(element(:foo,
           new
-          |> push(tag(:bar, "inner"))
+          |> push(element(:bar, "inner"))
           |> release
         ))
-      |> push(tag(:quux, "sister"))
+      |> push(element(:quux, "sister"))
       |> release
       |> flush
       == """
@@ -59,13 +59,13 @@ defmodule St.Test do
 
   test "mix nesting and a list content" do
     assert new
-      |> push(tag(:foo, [
+      |> push(element(:foo, [
           "inner",
           new
-          |> push(tag(:bar, "child"))
+          |> push(element(:bar, "child"))
           |> release
         ]))
-      |> push(tag(:quux, "sister"))
+      |> push(element(:quux, "sister"))
       |> release
       |> flush
       === """
@@ -77,13 +77,13 @@ defmodule St.Test do
       """ |> no_indent |> no_lf
   end
 
-  test "push two sister tags and then two nested in 2nd sis" do
+  test "push two sister elements and then two nested in 2nd sis" do
     assert new
-      |> push(tag(:foo, "sister"))
-      |> push(tag(:bar,
+      |> push(element(:foo, "sister"))
+      |> push(element(:bar,
           new
-          |> push(tag(:quux, "inner"))
-          |> push(tag(:cosmic, "inner as well"))
+          |> push(element(:quux, "inner"))
+          |> push(element(:cosmic, "inner as well"))
           |> release
         ))
       |> release

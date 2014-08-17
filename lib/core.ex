@@ -2,20 +2,20 @@ alias WebAssembly.Core
 
 defmodule Core do
   @moduledoc """
-  Core of the markup assembly.
+  Core of the elements assembly.
 
   Consists of two parts:
 
-  * `WebAssembly.Core.St` - a functional state of markup in the current block
-  * `WebAssembly.Core.Scope` - a wrapper around functional state, allowing for
-    mutable operations on it
+  * `WebAssembly.Core.St` - state of assembly in the current block
+  * `WebAssembly.Core.Scope` - wrapper around state, allowing for
+     mutable operations on it
   """
   require WebAssembly.Types, as: T
 
 
   defmodule St do
     @moduledoc """
-    Pure-functional state of markup assembly in the current block.
+    Pure-functional state of elements assembly in the current block.
     """
 
     defstruct stack: []
@@ -47,10 +47,7 @@ defmodule Core do
     @moduledoc """
       Mutability wrapper around `WebAssembly.Core.St`.
 
-      Corresponds to the inner content of currently assembled
-      element.
-
-      Internally uses `Agent`s.
+      Internally uses Agents.
     """
 
     @doc """

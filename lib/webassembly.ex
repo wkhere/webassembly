@@ -1,6 +1,6 @@
 defmodule WebAssembly do
   @moduledoc """
-  Wrapper module for assembling html document using macros.
+  Wrapper module for assembling html elements from blocks into iolist.
 
   Main entry point is `WebAssembly.DSL.builder/1`, which prepares
   environment for using HTML macros from `WebAssembly.HTML` module.

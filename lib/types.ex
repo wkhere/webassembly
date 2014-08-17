@@ -1,12 +1,15 @@
 defmodule WebAssembly.Types do
   @moduledoc """
-  Types of input and output data used in the tag assembly.
+  Types of input, intermediate and output data used in the elements assembly.
   """
 
-  @type tagname  :: atom
-  @type attrs    :: [{atom, atom | number | String.t}]
-  @type content  :: atom | number | String.t | out_tag | [String.t | out_tag]
-  @type out_tag  :: [String.t | [String.t] | content]
-  @type out_tag_void :: [String.t | [String.t]]
+  @type tag        :: atom
+  @type attributes :: [{atom, atom | number | String.t}]
+  @type content    :: atom | number | String.t | assembled_elements
+  @type assembled_tag           :: String.t
+  @type assembled_attributes    :: [String.t]
+  @type assembled_void_elements :: [assembled_tag | assembled_attributes]
+  @type assembled_elements      :: [assembled_tag | assembled_attributes |
+                                    content]
 
 end

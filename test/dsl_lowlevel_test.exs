@@ -7,48 +7,50 @@ defmodule DSL.LowLevelTest do
 
   test "basic builder" do
     buf = builder do
-      add_val! :x
+      add_value! :x
       _foo = "anything in between"
-      add_val! :y
+      add_value! :y
     end
     assert buf == [:x, :y]
   end
 
-  test "one content tag" do
+  test "one flat element" do
     buf = builder do
-      tag :foo, "content"
+      element :foo, "content"
     end
     assert buf == ["\n<foo>", "content", "</foo>"]
   end
 
-  test "nested content tags" do
+  test "element with a block containing flat element" do
     buf = builder do
-      tag :foo do
-        tag :bar, "content"
+      element :foo do
+        element :bar, "content"
       end
     end
     assert buf == ["\n<foo>", ["\n<bar>", "content", "</bar>"], "</foo>"]
   end
 
-  test "nested content tags and some siblings" do
+  test "nested elements with siblings" do
     buf = builder do
-      add_val! "simple text 1"
-      tag :foo do
-        tag :bar, "inner tag"
-        add_val! "inner text"
+      add_value! "outer text 1"
+      element :foo do
+        element :bar, "deep"
+        add_value! "inner text"
       end
-      add_val! "simple text 2"
+      add_value! "outer text 2"
     end
     assert buf ==
-      ["simple text 1", "\n<foo>",
-        ["\n<bar>", "inner tag", "</bar>", "inner text"],
-       "</foo>", "simple text 2"]
+      ["outer text 1",
+       "\n<foo>",
+          ["\n<bar>", "deep", "</bar>", "inner text"],
+       "</foo>", 
+       "outer text 2"]
   end
 
   test "attributes" do
     buf = builder do
-      tag :foo, class: "highclass", id: 42 do
-        tag :span, [style: "dotted"], "good morning"
+      element :foo, class: "highclass", id: 42 do
+        element :span, [style: "dotted"], "good morning"
       end
     end
     assert buf ==
@@ -57,10 +59,10 @@ defmodule DSL.LowLevelTest do
        "</foo>"]
   end
 
-  test "void tags" do
+  test "void elements" do
     buf = builder do
-      tag_void :foo
-      tag_void :bar, class: "high"
+      void_element :foo
+      void_element :bar, class: "high"
     end
     assert buf |> flush == """
       <foo />

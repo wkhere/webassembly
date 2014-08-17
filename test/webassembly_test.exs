@@ -3,10 +3,11 @@ defmodule WebAssembly.Test do
   import WebAssembly.TestHelper
   use    WebAssembly
 
+  doctest WebAssembly.DSL
   doctest WebAssembly.Tools.Input
   doctest WebAssembly.Tools.Output
 
-  test "mixed level tags/text, no single enclosing element" do
+  test "mixed level elements/text, no single enclosing element" do
     doc = builder do
       div "foo"
       div do
@@ -22,7 +23,7 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  test "more variations of tags w/ enclosing html element" do
+  test "more variations of elements w/ enclosing html element" do
     doc = builder do
       html do
         head do

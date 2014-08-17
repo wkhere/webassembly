@@ -3,27 +3,27 @@ defmodule WebAssembly.HTMLMacrosTest do
   #import WebAssembly.TestHelper
   use    WebAssembly
 
-  WebAssembly.HTML.void_tags
-  |> Enum.each fn tag ->
-    test "#{tag} test" do
-      doc = builder do: unquote(tag)(class: "foo")
-      doc_no_attrs = builder do: unquote(tag)()
-      tag = unquote(tag)
-      assert doc == [["\n<#{tag} ", [~s/class="foo"/], " />"]]
-      assert doc_no_attrs == ["<#{tag} />"]
+  WebAssembly.HTML.void_elements
+  |> Enum.each fn element ->
+    test "#{element} test" do
+      doc = builder do: unquote(element)(class: "foo")
+      doc_no_attrs = builder do: unquote(element)()
+      e = unquote(element)
+      assert doc == [["\n<#{e} ", [~s/class="foo"/], " />"]]
+      assert doc_no_attrs == ["<#{e} />"]
     end
   end
 
-  WebAssembly.HTML.nonvoid_tags
-  |> Enum.each fn tag ->
-    test "#{tag} test" do
-      doc = builder do: unquote(tag)([class: "foo"], "content")
-      doc_no_attrs = builder do: unquote(tag)("content")
-      tag = unquote(tag)
+  WebAssembly.HTML.nonvoid_elements
+  |> Enum.each fn element ->
+    test "#{element} test" do
+      doc = builder do: unquote(element)([class: "foo"], "content")
+      doc_no_attrs = builder do: unquote(element)("content")
+      e = unquote(element)
       assert doc ==
-        [["\n<#{tag} ", [~s/class="foo"/], ">"], "content", "</#{tag}>"]
+        [["\n<#{e} ", [~s/class="foo"/], ">"], "content", "</#{e}>"]
       assert doc_no_attrs ==
-        ["\n<#{tag}>", "content", "</#{tag}>"]
+        ["\n<#{e}>", "content", "</#{e}>"]
     end
   end 
 end
