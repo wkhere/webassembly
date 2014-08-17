@@ -1,6 +1,8 @@
 ### v0.3.0-dev
 
 * API simplified: `elements`/`pick` not needed anymore
+* better docs
+* readme describes features based on an embedded example
 
 ### v0.2.0
 
