@@ -14,7 +14,7 @@ defmodule WebAssembly.Examples do
           div class: "container", id: :content do
             ul do
               for index<-1..5, do:
-                li ["item ", index]
+                li "item #{index}"
             end
             random = :random.uniform(10)
             if random == 5 do
