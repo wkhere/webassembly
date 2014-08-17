@@ -53,21 +53,35 @@ defmodule Core do
       Internally uses `Agent`s.
     """
 
+    @doc """
+    Creates new mutable scope to hold the state of elements assembly.
+
+    Returns `pid` one can operate on.
+    """
     @spec new!() :: pid
     def new! do
       {:ok, pid} = Agent.start_link(fn -> St.new end)
       pid
     end
 
-    @spec push(pid, T.content) :: :ok
-    def push(pid, value) do
+    @doc """
+    Pushes a `value` into the assembly scope given by `pid`.
+    """
+    @spec push!(pid, T.content) :: :ok
+    def push!(pid, value) do
       Agent.update(pid, fn st0 ->
         St.push(st0, value)
       end)
     end
 
-    @spec release(pid) :: [T.content]
-    def release(pid) do
+    @doc """
+    Releases the assembly scope given by `pid`, returning
+    values in the order of pushing.
+
+    Stops underlying Agent.
+    """
+    @spec release!(pid) :: [T.content]
+    def release!(pid) do
       result = Agent.get(pid, fn st -> St.release(st) end)
       :ok = Agent.stop(pid)
       result

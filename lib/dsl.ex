@@ -38,7 +38,7 @@ defmodule WebAssembly.DSL do
 
   defmacro add_val!(v) do
     quote do
-      var!(scope!) |> Scope.push(unquote(v))
+      var!(scope!) |> Scope.push!(unquote(v))
     end
   end
 
@@ -69,7 +69,7 @@ defmodule WebAssembly.DSL do
         alias WebAssembly.Core.Scope
         var!(scope!) = Scope.new!
         unquote(body)
-        Scope.release(var!(scope!))
+        Scope.release!(var!(scope!))
       end.()
     end
       # the fn above is crucial -> it introduces new lexical
