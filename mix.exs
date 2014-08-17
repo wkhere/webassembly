@@ -1,4 +1,4 @@
-defmodule Webassembly.Mixfile do
+defmodule WebAssembly.Mixfile do
   use Mix.Project
 
   def project do
