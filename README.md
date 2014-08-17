@@ -62,6 +62,10 @@ and `:webassembly` to your apps in the `mix.exs`.
 
 More examples to come - like, how to blend it with [Plug] & stuff..
 
+## TDD
+
+WebAssembly aims to have 100% [test coverage].
+
 ## Thanks
 
 Loosely inspired by [Markaby].
@@ -76,3 +80,4 @@ The code is released under the BSD 2-Clause License.
 [iolist]:  http://www.erlang.org/doc/reference_manual/typespec.html
 [hex]:     http://hex.pm
 [void]:    http://www.w3.org/TR/html5/syntax.html#void-elements
+[test coverage]: https://coveralls.io/r/herenowcoder/webassembly
