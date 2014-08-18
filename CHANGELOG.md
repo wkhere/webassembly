@@ -1,3 +1,7 @@
+### v0.3.3
+
+* add empty `p` element as it is so often
+
 ### v0.3.2
 
 * bugfix: add missing `script` element
