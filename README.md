@@ -70,7 +70,28 @@ your template engine to render the whole page.
 WebAssembly is on [Hex], so just add `{:webassembly, "~> 0.3.1"}` to your deps
 and `:webassembly` to your apps in the `mix.exs`.
 
-More examples to come - like, how to blend it with [Plug] & stuff..
+Using it with [Plug] is a no-brainer - you just send the doc to `send_resp`:
+```Elixir
+defmodule Plugged do
+  import Plug.Conn
+  use WebAssembly
+
+  def init(opts), do: opts
+
+  def call(conn, []) do
+    doc = builder do
+      html do
+        body do
+          text "hello from Plug!"
+        end
+      end
+    end
+    conn = conn
+      |> put_resp_content_type("text/html")
+      |> send_resp(200, doc)
+  end
+end
+```
 
 ## TDD
 
