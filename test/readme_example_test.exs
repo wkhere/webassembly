@@ -4,7 +4,7 @@ defmodule WebAssembly.ReadmeExample.Test do
   import WebAssembly.Examples
 
   test "example" do
-    assert readme_ex |> flush == """
+    assert readme_ex_flushed |> no_lf == """
     <!DOCTYPE html><html>
       <head>
         <meta http-equiv="Content-Type" content="text/html" />
