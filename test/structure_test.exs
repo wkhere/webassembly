@@ -1,11 +1,7 @@
-defmodule WebAssembly.Test do
+defmodule WebAssembly.StructureTest do
   use    ExUnit.Case
   import WebAssembly.TestHelper
   use    WebAssembly
-
-  doctest WebAssembly.DSL
-  doctest WebAssembly.Tools.Input
-  doctest WebAssembly.Tools.Output
 
   test "mixed level elements/text, no single enclosing element" do
     doc = builder do
