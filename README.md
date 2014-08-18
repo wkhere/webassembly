@@ -53,7 +53,7 @@ Now what can be concluded from the example above:
 * if you want to emit just text without surrounding html tags,
   simply use `text` macro.
 
-Isn't it beautiful? For me it is..
+For me it's beautiful. What about you?
 
 ## Why?
 
