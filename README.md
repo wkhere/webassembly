@@ -35,7 +35,7 @@ DSL for creating html structure straight with Elixir blocks:
 
 This results in a deeply nested list (aka [iolist])
 which you can flatten or (better!) send to the socket as it is
-(via [Plug] & [Cowboy] for example).
+([via][via-plug] [Plug] & [Cowboy] for example).
 
 Now what can be concluded from the example above:
 
@@ -117,3 +117,4 @@ The code is released under the BSD 2-Clause License.
 [void]:    http://www.w3.org/TR/html5/syntax.html#void-elements
 [non-void]: http://www.w3.org/TR/html-markup/syntax.html#elements-html-syntax-list
 [test coverage]: https://coveralls.io/r/herenowcoder/webassembly
+[via-plug]: https://github.com/herenowcoder/webassembly#usage
