@@ -1,8 +1,3 @@
-### v0.3.2
-
-* bugfix: add missing `script` element
-* more docs & corner-case tests
-
 ### v0.3.1
 
 * internal APIs cleanup
