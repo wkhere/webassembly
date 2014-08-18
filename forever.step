@@ -15,6 +15,6 @@ fi
 echo -n "Compiling dev.. "; time mix compile
 which ctags >/dev/null && ctags -R $ctags_dirs &
 [[ $1 == doc* ]] && mix docs &
-[[ $1 == dia* ]] && nice mix dialyze --no-check  --error-handling --race-conditions --underspecs &
+[[ $1 == dia* ]] && time nice mix dialyze --no-check  --error-handling --race-conditions --underspecs &
 # ^^ could add --unmatched-returns after changing Core.Scope.push ret type
 echo -n "Running tests.. "; mix test
