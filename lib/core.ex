@@ -66,18 +66,9 @@ defmodule Core do
 
     Returns changed internal state.
     """
-    @spec push!(pid, T.content) :: St.t
-    def push!(pid, value)
-
-    def push!(_, %St{} = value) do
-      raise ArgumentError, "cant push state as a value: #{inspect value}"
-      # todo: try to detect pathological situation by other means
-    end
+    @spec push!(pid, T.content) :: :ok
     def push!(pid, value) do
-      Agent.get_and_update(pid, fn st0 ->
-        st = St.push(st0, value)
-        {st, st}
-      end)
+      Agent.update(pid, fn st0 -> St.push(st0, value) end)
     end
 
     @doc """

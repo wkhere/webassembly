@@ -183,8 +183,13 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
-  test "case of span(span :foo)" do
-    # this is a pathological case when one should open new block but didn't
-    assert_raise ArgumentError, fn -> builder do: span(span :foo) end
-   end
+  # 'bad-nesting' detection switched off - it worked only for some cases
+  #
+  #  test "nesting without do-block" do
+  #    # these are cases when one should open new block but didn't
+  #    assert_raise ArgumentError, fn -> builder do: span(span :foo) end
+  #    # above would raise in 0.2.0-0.3.1, but the ones below not:
+  #    assert_raise ArgumentError, fn -> builder do: span([1, span(:foo)]) end
+  #    assert_raise ArgumentError, fn -> builder do: span([span(:foo), 1]) end
+  #   end
 end
