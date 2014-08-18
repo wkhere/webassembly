@@ -2,6 +2,8 @@ defmodule WebAssembly.Examples do
   # needed to have examples as a separate module
   # to trigger dialyzer analysis of core & dsl
 
+  @moduledoc false
+
   alias WebAssembly.Types, as: T
 
   @spec readme_ex :: T.assembled_elements
