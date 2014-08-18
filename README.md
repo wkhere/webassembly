@@ -67,7 +67,7 @@ your template engine to render the whole page.
 
 ## Usage
 
-WebAssembly is on [Hex], so just add `{:webassembly, "~> 0.3.0"}` to your deps
+WebAssembly is on [Hex], so just add `{:webassembly, "~> 0.3.1"}` to your deps
 and `:webassembly` to your apps in the `mix.exs`.
 
 More examples to come - like, how to blend it with [Plug] & stuff..
@@ -78,7 +78,7 @@ WebAssembly aims to have 100% [test coverage].
 
 ## Type Safety
 
-As for `0.3.0` WebAssembly dialyzes with no warnings.
+As for releases `0.3.0` and above WebAssembly dialyzes with no warnings.
 
 ## Thanks
 
