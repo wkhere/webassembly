@@ -63,8 +63,6 @@ defmodule Core do
 
     @doc """
     Pushes a `value` into the assembly scope given by `pid`.
-
-    Returns changed internal state.
     """
     @spec push!(pid, T.content) :: :ok
     def push!(pid, value) do
