@@ -1,9 +1,9 @@
-defmodule WebAssembly.ReadmeExample.Test do
+defmodule WebAssembly.Examples.Test do
   use ExUnit.Case
   import WebAssembly.TestHelper
   import WebAssembly.Examples
 
-  test "example" do
+  test "readme example" do
     assert readme_ex_flushed |> no_lf == """
     <!DOCTYPE html><html>
       <head>
