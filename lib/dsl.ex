@@ -87,9 +87,10 @@ defmodule WebAssembly.DSL do
 
   @doc ~S"""
   Create HTML element in the assembly scope,
-  possibly creating new scope.
+  possibly nesting a new scope.
 
-  If called with a block, introduces a new scope for nested elements.
+  New scope for inner elements is created when
+  this macro is called with a `do`-block.
 
   Must be called inside `builder/1` block.
 
