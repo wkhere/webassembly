@@ -57,6 +57,16 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
+  test "mixed blocks where inner one ends with non-assembly expr" do
+    doc = builder do
+      div do
+        text "foo"
+        _var = :whatever
+      end
+    end
+    assert doc |> flush == "<div>foo</div>"
+  end
+
   test "loop" do
     doc = builder do
       ul do
@@ -70,6 +80,18 @@ defmodule WebAssembly.Test do
       </ul>
       """
       |> no_indent |> no_lf
+  end
+
+  test "loop with inner block ending with non-assembly expr" do
+    doc = builder do
+      for x <- 1..1 do
+        li "#{x}"
+        _var = :whatever
+      end
+    end
+    assert doc |> flush == """
+      <li>1</li>
+    """ |> no_indent |> no_lf
   end
 
   test "loop with do-blocks inside" do
@@ -110,11 +132,35 @@ defmodule WebAssembly.Test do
       |> no_indent |> no_lf
   end
 
+  test "Enum loop with fn ending with non-assembly expr" do
+    doc = builder do
+      Enum.map 1..1, fn x ->
+        li "#{x}"
+        _var = :whatever
+      end
+    end
+    assert doc |> flush == """
+      <li>1</li>
+    """ |> no_indent |> no_lf
+  end
+
   test "closure" do
     doc = builder do
       fn -> span "foo" end.()
     end
     assert doc |> flush == "<span>foo</span>"
+  end
+
+  test "closure ending with non-assembly expr" do
+    doc = builder do
+      fn ->
+        li "1"
+        _var = :whatever
+      end.()
+    end
+    assert doc |> flush == """
+      <li>1</li>
+    """ |> no_indent |> no_lf
   end
 
   test "attrs" do
