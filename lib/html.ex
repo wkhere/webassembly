@@ -64,6 +64,9 @@ defmodule WebAssembly.HTML do
     quote do: add_value! unquote(content)
   end
 
+  defmacro p(), do:
+    quote do: element(:p, [])
+
   # meta helpers
 
   def nonvoid_elements, do: @nonvoid_elements
