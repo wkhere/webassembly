@@ -35,7 +35,7 @@ DSL for creating html structure straight with Elixir blocks:
 
 This results in a deeply nested list (aka [iolist])
 which you can flatten or (better!) send to the socket as it is
-([via][via-plug] [Plug] & [Cowboy] for example).
+([via Plug & Cowboy][via-plug] for example).
 
 Now what can be concluded from the example above:
 
