@@ -159,6 +159,11 @@ defmodule WebAssembly.StructureTest do
     """ |> no_indent |> no_lf
   end
 
+  test "text() should really turn into string" do
+    doc = builder do: (text :atom; text 1)
+    assert doc |> :erlang.iolist_to_binary |> no_lf == "atom1"
+  end
+
   test "attrs" do
     doc = builder do
       span [class: "hilight"], "foo"

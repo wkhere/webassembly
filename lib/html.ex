@@ -61,7 +61,7 @@ defmodule WebAssembly.HTML do
   end
 
   defmacro text(content) do
-    quote do: add_value! unquote(content)
+    quote do: add_value! "#{unquote(content)}"
   end
 
   defmacro p(), do:

@@ -1,3 +1,7 @@
+### v0.3.4-dev
+
+* text() macro turns arg into a string instead of just passing value
+
 ### v0.3.3
 
 * add empty `p` element as it is so often
