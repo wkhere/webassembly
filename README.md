@@ -75,11 +75,13 @@ Using it with [Plug] is a no-brainer - you just pass the doc to `send_resp/3`:
 ```Elixir
 defmodule Plugged do
   import Plug.Conn
+  use Plug.Router
   use WebAssembly
 
-  def init(opts), do: opts
+  plug :match
+  plug :dispatch
 
-  def call(conn, []) do
+  get "/" do
     doc = builder do
       html do
         body do
@@ -87,9 +89,9 @@ defmodule Plugged do
         end
       end
     end
-    conn = conn
-      |> put_resp_content_type("text/html")
-      |> send_resp(200, doc)
+    conn
+    |> put_resp_content_type("text/html")
+    |> send_resp(200, doc)
   end
 end
 ```
