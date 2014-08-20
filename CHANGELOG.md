@@ -1,5 +1,6 @@
 ### v0.3.4-dev
 
+* use iolist_to_binary in `flush/1` to reflect how it works with sockets
 * text() macro turns arg into a string instead of just passing value
 
 ### v0.3.3

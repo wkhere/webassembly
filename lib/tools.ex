@@ -58,7 +58,7 @@ defmodule WebAssembly.Tools do
     @spec flush(T.assembled_elements) :: binary
 
     def flush(chunks) when is_list(chunks) do
-      chunks |> List.flatten |> Enum.join
+      chunks |> :erlang.iolist_to_binary
     end
   end
 end

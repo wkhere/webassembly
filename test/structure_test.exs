@@ -95,7 +95,7 @@ defmodule WebAssembly.StructureTest do
       div class: "outer" do
         for x <- 1..2 do
           div class: "inner" do
-            span x
+            span "#{x}"
           end
         end
       end
@@ -116,7 +116,7 @@ defmodule WebAssembly.StructureTest do
   test "loop via Enum" do
     doc = builder do
       ul do
-        Enum.map 1..2, &(li &1)
+        Enum.map 1..2, &(li "#{&1}")
       end
     end
     assert doc |> flush == """
