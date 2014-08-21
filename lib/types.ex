@@ -5,7 +5,7 @@ defmodule WebAssembly.Types do
 
   @type tag        :: atom
   @type attributes :: [{atom, atom | number | String.t}]
-  @type content    :: atom | number | String.t | assembled_elements
+  @type content    :: String.t | assembled_elements
   @type assembled_tag           :: String.t
   @type assembled_attributes    :: [String.t]
   @type assembled_void_elements :: [assembled_tag | assembled_attributes]
