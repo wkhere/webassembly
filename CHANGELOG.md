@@ -1,5 +1,6 @@
 ### v0.3.4-dev
 
+* upgrade to ELixir 1.0
 * use iolist_to_binary in `flush/1` to reflect how it works with sockets
 * text() macro turns arg into a string instead of just passing value
 
@@ -43,8 +44,7 @@
 ### v0.1.0
 
 * Version extracted from my [Rockside] project
-
-Allows for nesting, nonvoid & void tags,
-loops & closures unrolling via `gather`/`pick` macros.
+* Allows for nesting, nonvoid & void tags,
+  loops & closures unrolling via `gather`/`pick` macros.
 
 [rockside]: https://github.com/herenowcoder/rockside
