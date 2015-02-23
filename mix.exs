@@ -5,7 +5,7 @@ defmodule WebAssembly.Mixfile do
     [app: :webassembly,
      docs: [main: WebAssembly],
      version: "0.3.4-dev",
-     elixir: "~> 0.15.0",
+     elixir: "~> 1.0.0",
      deps: deps,
      description: description,
      package: package,
@@ -18,7 +18,7 @@ defmodule WebAssembly.Mixfile do
   end
 
   defp deps do
-    [{:excoveralls, "~> 0.3.2", only: :test}]
+    [{:excoveralls, "== 0.3.6", only: :test}]
   end
 
   defp description do
