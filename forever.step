@@ -12,8 +12,12 @@ if [ -n "$Elixir_src" ]; then
     ctags_dirs="$ctags_dirs $Elixir_src/lib/elixir/lib"
 fi
 
+[ -z "$1" ] && set -- "test"
 echo -n "Compiling dev.. "; time mix compile
 which ctags >/dev/null && ctags -R $ctags_dirs &
 [[ $1 == doc* ]] && mix docs
 [[ $1 == dia* ]] && time nice mix dialyze --no-check  --error-handling --race-conditions --underspecs --unmatched-returns
-echo -n "Running tests.. "; mix test
+if [[ $1 == test ]]; then
+    shift
+    echo -n "Running tests.. "; mix test $@
+fi
