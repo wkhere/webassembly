@@ -26,22 +26,10 @@ defmodule WebAssembly.Mixfile do
     WebAssembly is a web DSL for Elixir.
 
     You create html structure straight using do blocks.
-    Means, you can intermix html-building blocks with full Elixir syntax:
-
-        div class: "container" do
-          n = get_the_size
-          if n > 1 do
-            ul do
-              for index <- 1..n, do:
-                li "item #{index}"
-            end
-          else
-            span "got only one item"
-          end
-        end
+    Means, you can intermix html-building blocks with full Elixir syntax.
 
     DSL output is an iolist, which you can flatten to string, but
-    better use is to feed it to the socket (via Plug & Cowboy).
+    better use is to just feed it to the socket (via Plug & Cowboy).
 
     WebAssembly aims to have 100% test coverage.
     """
