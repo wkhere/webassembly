@@ -5,9 +5,6 @@ defmodule WebAssembly.DSL do
   You shouldn't be using this module directly except of `builder/1` macro.
   """
 
-  alias   WebAssembly.Core.Scope
-  require Scope
-
 
   defmodule Tags do
     @moduledoc false
@@ -34,54 +31,65 @@ defmodule WebAssembly.DSL do
     end
   end
 
+  alias WebAssembly.Core
 
-  defmodule Internal do
-    @moduledoc false
-      
-    defmacro add_value!(value) do
-      quote do
-        var!(scope!) |> Scope.push!(unquote(value))
-      end
-    end
 
-    defmacro add_element!(name, attributes, content) do
-      quote do
-        import Tags
-        add_value! tag_start(unquote(name), unquote(attributes))
-        add_value! unquote(content)
-        add_value! tag_end(unquote(name))
-      end
-    end
-
-    defmacro add_void_element!(name, attributes) do
-      quote do
-        import Tags
-        add_value! tag_only(unquote(name), unquote(attributes))
-      end
+  defmacro add_value!(value) do
+    quote do
+      Core.Builder.push(unquote(value))
     end
   end
 
+  defmacro add_scoped_element!(name, attributes, content) do
+    quote do
+      import Tags
+      add_value! tag_start(unquote(name), unquote(attributes))
+      unquote(content)
+      add_value! tag_end(unquote(name))
+    end
+  end
+
+  defmacro add_element!(name, attributes, content) do
+    quote do
+      import Tags
+      add_value! tag_start(unquote(name), unquote(attributes))
+      add_value! unquote(content)
+      add_value! tag_end(unquote(name))
+    end
+  end
+
+  defmacro add_void_element!(name, attributes) do
+    quote do
+      import Tags
+      add_value! tag_only(unquote(name), unquote(attributes))
+    end
+  end
+
+
   # basic api
-
-  @doc """
-  Manage assembly scopes.
-
-  All HTML macros must be called within the provided block. 
-  """
+  
   defmacro builder(do_block)
 
   defmacro builder(do: body) do
     quote do
-      alias WebAssembly.Core.Scope
-      import Internal
-      fn ->
-        var!(scope!) = Scope.new!
-        unquote(body)
-        Scope.release!(var!(scope!))
-      end.()
+      Core.Builder.start
+      with_scope do: unquote(body)
+      Core.Builder.finish
     end
-      # the fn above is crucial -> it introduces new lexical
-      # scope, so our `scope!` var doesn't gets overwritten
+  end
+
+  @doc """
+  Manage assembly scopes.
+  """
+  defmacro with_scope(do_block)
+
+  defmacro with_scope(do: body) do
+    quote do
+      #import Internal
+      Core.Builder.new_scope
+      unquote(body)
+      Core.Builder.release_scope
+    end
   end
 
 
@@ -92,7 +100,8 @@ defmodule WebAssembly.DSL do
   New scope for inner elements is created when
   this macro is called with a `do`-block.
 
-  Must be called inside `builder/1` block.
+  Should be called inside `builder/1` block 
+  somewhere in the call stack.
 
   Expects `attributes` to be Elixir keywords.
   They will get converted into HTML format.
@@ -115,8 +124,8 @@ defmodule WebAssembly.DSL do
 
   defmacro element(name, attributes, do: body) do
     quote do
-      add_element!(unquote(name), unquote(attributes),
-        builder do: unquote(body))
+      add_scoped_element!(unquote(name), unquote(attributes),
+        with_scope do: unquote(body))
     end
   end
 
