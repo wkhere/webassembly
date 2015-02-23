@@ -1,4 +1,4 @@
-### v0.3.4-dev
+### v0.3.4 (2015-02-23)
 
 * upgrade to ELixir 1.0
 * use iolist_to_binary in `flush/1` to reflect how it works with sockets
