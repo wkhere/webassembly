@@ -17,9 +17,10 @@ defmodule WebAssembly.Mixfile do
       description: 'Web DSL']
   end
 
-  defp deps do
-    [{:excoveralls, "== 0.3.6", only: :test}]
-  end
+  defp deps, do: [
+    {:excoveralls,  "== 0.3.6",   only: :test},
+    {:ex_doc,       "~> 0.7.1",   only: :dev},
+  ]
 
   defp description do
     ~S"""

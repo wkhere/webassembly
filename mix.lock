@@ -1,3 +1,4 @@
-%{"excoveralls": {:hex, :excoveralls, "0.3.6"},
+%{"ex_doc": {:hex, :ex_doc, "0.7.1"},
+  "excoveralls": {:hex, :excoveralls, "0.3.6"},
   "exjsx": {:hex, :exjsx, "3.1.0"},
   "jsx": {:hex, :jsx, "2.4.0"}}
