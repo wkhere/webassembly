@@ -1,10 +1,10 @@
-defmodule WebAssembly.HexDescExample.Test do
+defmodule WebAssembly.Moduledoc.Test do
   use ExUnit.Case
   import WebAssembly.TestHelper
 
   defp get_the_size, do: 2
 
-  test "example" do
+  test "example snippet from WebAssembly moduledoc" do
     use WebAssembly
     doc = builder do
         div class: "container" do
