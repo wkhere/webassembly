@@ -55,13 +55,13 @@ defmodule WebAssembly.HTML do
 
   defmacro html(attrs\\[], content) do
     quote do
-      add_value! "<!DOCTYPE html>"
+      value "<!DOCTYPE html>"
       element(:html, unquote(attrs), unquote(content))
     end
   end
 
   defmacro text(content) do
-    quote do: add_value! "#{unquote(content)}"
+    quote do: value("#{unquote(content)}")
   end
 
   defmacro p(), do:

@@ -6,9 +6,9 @@ defmodule WebAssembly.DSL.LowLevelTest do
 
   test "basic builder" do
     buf = builder do
-      add_value! :x
+      value :x
       _foo = "anything in between"
-      add_value! :y
+      value :y
     end
     assert buf == [:x, :y]
   end
@@ -31,12 +31,12 @@ defmodule WebAssembly.DSL.LowLevelTest do
 
   test "nested elements with siblings" do
     buf = builder do
-      add_value! "outer text 1"
+      value "outer text 1"
       element :foo do
         element :bar, "deep"
-        add_value! "inner text"
+        value "inner text"
       end
-      add_value! "outer text 2"
+      value "outer text 2"
     end
     assert buf ==
       ["outer text 1",

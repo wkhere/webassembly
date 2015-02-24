@@ -75,6 +75,28 @@ defmodule WebAssembly.DSL do
       add_void_element!(unquote(name), unquote(attributes))
     end
   end
+
+
+  @doc ~S"""
+  Create any value in the assembly scope.
+
+  Should be called inside the `WebAssembly.Builder` context.
+
+  Please note there's no typechecking here and the final result
+  will be treated as an iolist.
+  Means: if unsure, put only strings here.
+
+  ## Examples
+
+      iex> builder do: value "what are your values?"
+      ["what are your values?"]
+      iex> (builder do: (element :foo, do: value "bar"))
+      iex> |> WebAssembly.Tools.Output.flush
+      "\n<foo>bar</foo>"
+  """
+  defmacro value(val) do
+    quote do: add_value!(unquote(val))
+  end
 end
 
 
