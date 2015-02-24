@@ -1,21 +1,7 @@
 defmodule WebAssembly.DSL do
   @moduledoc """
-  Basic DSL for assembling HTML elements from blocks into iolist.
-
-  You shouldn't be using this module directly except of `builder/1` macro.
+  Basic DSL for assembling HTML elements from blocks.
   """
-
-
-  defmacro builder(do_block)
-
-  defmacro builder(do: body) do
-    quote do
-      import  WebAssembly.DSL.Internal
-      WebAssembly.Core.Builder.start
-      with_scope do: unquote(body)
-      WebAssembly.Core.Builder.finish
-    end
-  end
 
 
   @doc ~S"""
@@ -25,14 +11,14 @@ defmodule WebAssembly.DSL do
   New scope for inner elements is created when
   this macro is called with a `do`-block.
 
-  Should be called inside `builder/1` block 
-  somewhere in the call stack.
+  Should be called inside the `WebAssembly.Builder` context.
 
   Expects `attributes` to be Elixir keywords.
   They will get converted into HTML format.
   Underscores in keys will be converted to dash signs. 
 
-  This macro is to be used by `WebAssembly.HTML` module.
+  This macro is to be used by `WebAssembly.HTML` module,
+  unless you want to invent your own elements.
 
   ## Examples
 
@@ -68,11 +54,12 @@ defmodule WebAssembly.DSL do
   Create HTML void element (ie. element without content)
   in the assembly scope.
 
-  Must be called inside `builder/1` block.
+  Should be called inside the `WebAssembly.Builder` context.
 
   See `element/3` for explanation on the format of `attributes`.
 
-  This macro is to be used by `WebAssembly.HTML` module.
+  This macro is to be used by `WebAssembly.HTML` module,
+  unless you want to invent your own elements.
 
   ## Examples
 

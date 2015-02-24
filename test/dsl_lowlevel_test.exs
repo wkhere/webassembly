@@ -1,9 +1,8 @@
-alias WebAssembly.DSL
-
-defmodule DSL.LowLevelTest do
+defmodule WebAssembly.DSL.LowLevelTest do
   use    ExUnit.Case
   import WebAssembly.TestHelper
-  import DSL
+  import WebAssembly.DSL
+  import WebAssembly.Builder
 
   test "basic builder" do
     buf = builder do

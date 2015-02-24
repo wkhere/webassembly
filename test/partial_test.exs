@@ -2,6 +2,7 @@ defmodule WebAssembly.Partial.Test do
   use    ExUnit.Case
   import WebAssembly.TestHelper
   import WebAssembly.DSL
+  import WebAssembly.Builder
   import WebAssembly.HTML, only: [text: 1]
 
   def partial1 do
