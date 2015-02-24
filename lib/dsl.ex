@@ -6,89 +6,14 @@ defmodule WebAssembly.DSL do
   """
 
 
-  defmodule Tags do
-    @moduledoc false
-
-    import WebAssembly.Tools.Input, only: [htmlize_attributes: 1]
-
-    defmacro tag_start(tag, []) do
-      quote do: "\n<#{unquote(tag)}>"
-    end
-    defmacro tag_start(tag, attributes) do
-      quote do: ["\n<#{unquote(tag)} ",
-                  htmlize_attributes(unquote(attributes)), ">"]
-    end
-
-    defmacro tag_end(tag) do
-      quote do: "</#{unquote(tag)}>"
-    end
-
-    defmacro tag_only(tag, []), do:
-      quote do: "<#{unquote(tag)} />"
-    defmacro tag_only(tag, attributes) do
-      quote do: ["\n<#{unquote(tag)} ",
-                  htmlize_attributes(unquote(attributes)), " />"]
-    end
-  end
-
-  alias WebAssembly.Core
-
-
-  defmacro add_value!(value) do
-    quote do
-      Core.Builder.push(unquote(value))
-    end
-  end
-
-  defmacro add_scoped_element!(name, attributes, content) do
-    quote do
-      import Tags
-      add_value! tag_start(unquote(name), unquote(attributes))
-      unquote(content)
-      add_value! tag_end(unquote(name))
-    end
-  end
-
-  defmacro add_element!(name, attributes, content) do
-    quote do
-      import Tags
-      add_value! tag_start(unquote(name), unquote(attributes))
-      add_value! unquote(content)
-      add_value! tag_end(unquote(name))
-    end
-  end
-
-  defmacro add_void_element!(name, attributes) do
-    quote do
-      import Tags
-      add_value! tag_only(unquote(name), unquote(attributes))
-    end
-  end
-
-
-  # basic api
-  
   defmacro builder(do_block)
 
   defmacro builder(do: body) do
     quote do
-      Core.Builder.start
+      import  WebAssembly.DSL.Internal
+      WebAssembly.Core.Builder.start
       with_scope do: unquote(body)
-      Core.Builder.finish
-    end
-  end
-
-  @doc """
-  Manage assembly scopes.
-  """
-  defmacro with_scope(do_block)
-
-  defmacro with_scope(do: body) do
-    quote do
-      #import Internal
-      Core.Builder.new_scope
-      unquote(body)
-      Core.Builder.release_scope
+      WebAssembly.Core.Builder.finish
     end
   end
 
@@ -124,14 +49,18 @@ defmodule WebAssembly.DSL do
 
   defmacro element(name, attributes, do: body) do
     quote do
+      import WebAssembly.DSL.Internal
       add_scoped_element!(unquote(name), unquote(attributes),
         with_scope do: unquote(body))
     end
   end
 
   defmacro element(name, attributes, flat_content) do
-    quote do: add_element!(unquote(name),
-      unquote(attributes), unquote(flat_content))
+    quote do
+      import WebAssembly.DSL.Internal
+      add_element!(unquote(name),
+        unquote(attributes), unquote(flat_content))
+    end
   end
 
 
@@ -154,7 +83,83 @@ defmodule WebAssembly.DSL do
 
   """
   defmacro void_element(name, attributes\\[]) do
-    quote do: add_void_element!(unquote(name), unquote(attributes))
+    quote do
+      import WebAssembly.DSL.Internal
+      add_void_element!(unquote(name), unquote(attributes))
+    end
+  end
+end
+
+
+defmodule WebAssembly.DSL.Internal do
+
+  defmodule Tags do
+    @moduledoc false
+
+    import WebAssembly.Tools.Input, only: [htmlize_attributes: 1]
+
+    defmacro tag_start(tag, []) do
+      quote do: "\n<#{unquote(tag)}>"
+    end
+    defmacro tag_start(tag, attributes) do
+      quote do: ["\n<#{unquote(tag)} ",
+                  htmlize_attributes(unquote(attributes)), ">"]
+    end
+
+    defmacro tag_end(tag) do
+      quote do: "</#{unquote(tag)}>"
+    end
+
+    defmacro tag_only(tag, []), do:
+      quote do: "<#{unquote(tag)} />"
+    defmacro tag_only(tag, attributes) do
+      quote do: ["\n<#{unquote(tag)} ",
+                  htmlize_attributes(unquote(attributes)), " />"]
+    end
   end
 
+
+  @doc """
+  Manage assembly scopes.
+  """
+  defmacro with_scope(do_block)
+
+  defmacro with_scope(do: body) do
+    quote do
+      WebAssembly.Core.Builder.new_scope
+      unquote(body)
+      WebAssembly.Core.Builder.release_scope
+    end
+  end
+
+  defmacro add_value!(value) do
+    quote do
+      WebAssembly.Core.Builder.push(unquote(value))
+    end
+  end
+
+  defmacro add_scoped_element!(name, attributes, content) do
+    quote do
+      import Tags
+      add_value! tag_start(unquote(name), unquote(attributes))
+      unquote(content)
+      add_value! tag_end(unquote(name))
+    end
+  end
+
+  defmacro add_element!(name, attributes, content) do
+    quote do
+      import Tags
+      add_value! tag_start(unquote(name), unquote(attributes))
+      add_value! unquote(content)
+      add_value! tag_end(unquote(name))
+    end
+  end
+
+  defmacro add_void_element!(name, attributes) do
+    quote do
+      import Tags
+      add_value! tag_only(unquote(name), unquote(attributes))
+    end
+  end
 end
