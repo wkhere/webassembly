@@ -14,7 +14,7 @@ defmodule WebAssembly.Builder do
   controllers/handlers).
   """
   # ^ todo: link to examples, eg. in `WebAssembly` doc
-  defmacro builder(do_block)
+  defmacro builder(do_block_or_expr)
 
   defmacro builder(do: body) do
     quote do
@@ -23,5 +23,9 @@ defmodule WebAssembly.Builder do
       with_scope do: unquote(body)
       WebAssembly.Core.Engine.return
     end
+  end
+
+  defmacro builder(expr) do
+    quote do: (builder do: unquote(expr))
   end
 end
