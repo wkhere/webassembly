@@ -1,5 +1,8 @@
-### v0.5.0-dev
+### v0.5.0 (2015-02-24)
 
+* DSL: `value/1`
+* `builder/1` macro moved to separate module
+* impl: DSL revamp
 
 ### v0.4.0 (2015-02-24)
 
