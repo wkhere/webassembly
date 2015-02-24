@@ -96,6 +96,8 @@ defmodule Plugged do
 end
 ```
 
+API details are available at [hexdocs].
+
 ## TDD
 
 WebAssembly aims to have 100% [test coverage][cov].
@@ -119,6 +121,7 @@ The code is released under the BSD 2-Clause License.
 [hex]:      http://hex.pm
 [void]:     http://www.w3.org/TR/html5/syntax.html#void-elements
 [non-void]: http://www.w3.org/TR/html-markup/syntax.html#elements-html-syntax-list
+[hexdocs]:  http://hexdocs.pm/webassembly
 [cov]:      https://coveralls.io/r/herenowcoder/webassembly
 [dia]:      https://github.com/fishcakez/dialyze
 [via-plug]: https://github.com/herenowcoder/webassembly#usage
