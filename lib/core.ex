@@ -10,6 +10,8 @@ defmodule Core do
 
     defstruct scopes: [], result: nil
 
+    require WebAssembly.Types, as: T
+
     defp pid(), do: Process.get(@pid_key)
 
     @spec fire() :: :ok
@@ -46,8 +48,6 @@ defmodule Core do
           %@s{ result: reverse(scope), scopes: :finished }
       end)
     end
-
-    require WebAssembly.Types, as: T
 
     @spec return() :: [T.content]
     def return() do
