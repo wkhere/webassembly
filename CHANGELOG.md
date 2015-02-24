@@ -1,4 +1,4 @@
-### v0.4.0-dev
+### v0.4.0 (2015-02-24)
 
 * impl: Core revamp
 * allow for "partials"
