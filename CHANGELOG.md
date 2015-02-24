@@ -1,3 +1,8 @@
+### v0.5.1 "Because I can"
+
+* impl: in-Core renames, docs etc
+* fix Core typespecs (was invalid since bc5d06e - 0.4.0)
+
 ### v0.5.0 (2015-02-24)
 
 * DSL: `value/1`
