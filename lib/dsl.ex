@@ -101,6 +101,7 @@ end
 
 
 defmodule WebAssembly.DSL.Internal do
+  @moduledoc false #todo
 
   defmodule Tags do
     @moduledoc false

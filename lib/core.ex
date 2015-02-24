@@ -1,11 +1,12 @@
 alias WebAssembly.Core
 
 defmodule Core do
-  @moduledoc """
-  Core of the elements assembly.
-  """
+  #@moduledoc "Core of the elements assembly."
+  @moduledoc false #todo
 
   defmodule Builder do
+    @moduledoc false #todo
+
     @s __MODULE__
     @pid_key :builder_pid
 
