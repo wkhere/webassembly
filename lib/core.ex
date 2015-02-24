@@ -37,19 +37,19 @@ defmodule WebAssembly.Core do
     end
 
     @doc """
-    Push `val` into the current scope.
+    Push `value` into the current scope.
     """
     @spec push(T.content) :: :ok
-    def push(val) do
+    def push(value) do
       Agent.update(pid, fn %{scopes: [scope|prevs]} = state ->
-        %{ state | scopes: [[val|scope] | prevs] }
+        %{ state | scopes: [[value|scope] | prevs] }
       end)
     end
 
     @doc """
     Release the current scope, merging it with the uplevel one.
 
-    If this was last scope, prepare the engine for `return/0`.
+    If this was the last scope, prepare the engine for `return/0`.
     """
     @spec release_scope() :: :ok
     def release_scope() do
