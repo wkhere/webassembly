@@ -40,7 +40,10 @@ defmodule WebAssembly.Mixfile do
     [ contributors: ["Wojciech Kaczmarek"],
       licenses: ["BSD"],
       description: description,
-      links: %{"GitHub" => "https://github.com/herenowcoder/webassembly"}
+      links: %{
+        "GitHub"    => "https://github.com/herenowcoder/webassembly",
+        "HexDocs"   => "http://hexdocs.pm/webassembly",
+      },
     ]
   end
 end
