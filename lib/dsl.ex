@@ -136,15 +136,15 @@ defmodule WebAssembly.DSL.Internal do
 
   defmacro with_scope(do: body) do
     quote do
-      WebAssembly.Core.Builder.new_scope
+      WebAssembly.Core.Engine.new_scope
       unquote(body)
-      WebAssembly.Core.Builder.release_scope
+      WebAssembly.Core.Engine.release_scope
     end
   end
 
   defmacro add_value!(value) do
     quote do
-      WebAssembly.Core.Builder.push(unquote(value))
+      WebAssembly.Core.Engine.push(unquote(value))
     end
   end
 

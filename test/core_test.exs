@@ -1,4 +1,4 @@
-defmodule WebAssembly.Core.Builder.Test.Helpers do
+defmodule WebAssembly.Core.Test.Helpers do
     import WebAssembly.DSL.Internal.Tags
 
     def el(name, content), do:
@@ -8,10 +8,10 @@ defmodule WebAssembly.Core.Builder.Test.Helpers do
 end
 
 
-defmodule WebAssembly.Core.Builder.Test do
+defmodule WebAssembly.Core.Test do
   use    ExUnit.Case
   import WebAssembly.TestHelper
-  import WebAssembly.Core.Builder
+  import WebAssembly.Core.Engine
 
   import __MODULE__.Helpers
 

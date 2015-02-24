@@ -1,15 +1,13 @@
-alias WebAssembly.Core
-
-defmodule Core do
+defmodule WebAssembly.Core do
   @moduledoc false
 
-  defmodule Builder do
+  defmodule Engine do
     @moduledoc """
     Elements-assembling engine used internally by `WebAssembly.Builder` and `WebAssembly.DSL`.
     """
 
     @s __MODULE__
-    @pid_key :builder_pid
+    @pid_key :webassembly_engine_pid
 
     defstruct scopes: [], result: nil
 
