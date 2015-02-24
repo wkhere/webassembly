@@ -44,15 +44,15 @@ defmodule Core do
           scope_merged = [reverse(scope1) | scope0]
           %{ state | scopes: [scope_merged | prevs] }
 
-        %{scopes: [scope|[]]} ->
-          %@s{ result: reverse(scope), scopes: :finished }
+        %{scopes: [scope]} ->
+          %@s{ result: reverse(scope), scopes: :released }
       end)
     end
 
     @spec return() :: [T.content]
     def return() do
       result = Agent.get(pid, fn
-        %{scopes: :finished, result: res} ->
+        %{scopes: :released, result: res} ->
         res
       end)
       :ok = Agent.stop(pid)
