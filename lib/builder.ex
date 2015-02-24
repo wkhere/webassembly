@@ -6,6 +6,12 @@ defmodule WebAssembly.Builder do
 
   @doc ~S"""
   Generate iolist from HTML elements given in a block with the DSL.
+
+  Code being run in the block can be split into different fuctions
+  (this is an equivalent of partial templates).
+  Builder is guaranteed to work as long as calls happen in the same
+  Erlang process, which is typical for the intended use (webapp
+  controllers/handlers).
   """
   # ^ todo: link to examples, eg. in `WebAssembly` doc
   defmacro builder(do_block)
