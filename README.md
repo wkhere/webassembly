@@ -98,11 +98,11 @@ end
 
 ## TDD
 
-WebAssembly aims to have 100% [test coverage].
+WebAssembly aims to have 100% [test coverage][cov].
 
 ## Type Safety
 
-As for releases `0.3.0` and above WebAssembly dialyzes with no warnings.
+As for releases `0.3.0` and above WebAssembly [dialyzes][dia] with no warnings.
 
 ## Thanks
 
@@ -112,12 +112,13 @@ Loosely inspired by [Markaby].
 
 The code is released under the BSD 2-Clause License.
 
-[markaby]: http://markaby.github.io/
-[plug]:    http://hex.pm/packages/plug
-[cowboy]:  http://hex.pm/packages/cowboy
-[iolist]:  http://www.erlang.org/doc/reference_manual/typespec.html
-[hex]:     http://hex.pm
-[void]:    http://www.w3.org/TR/html5/syntax.html#void-elements
+[markaby]:  http://markaby.github.io/
+[plug]:     http://hex.pm/packages/plug
+[cowboy]:   http://hex.pm/packages/cowboy
+[iolist]:   http://www.erlang.org/doc/reference_manual/typespec.html
+[hex]:      http://hex.pm
+[void]:     http://www.w3.org/TR/html5/syntax.html#void-elements
 [non-void]: http://www.w3.org/TR/html-markup/syntax.html#elements-html-syntax-list
-[test coverage]: https://coveralls.io/r/herenowcoder/webassembly
+[cov]:      https://coveralls.io/r/herenowcoder/webassembly
+[dia]:      https://github.com/fishcakez/dialyze
 [via-plug]: https://github.com/herenowcoder/webassembly#usage
