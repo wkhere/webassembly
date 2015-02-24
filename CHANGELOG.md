@@ -1,8 +1,11 @@
 ### v0.4.0-dev
 
+* impl: Core revamp
+* allow for "partials"
+
 ### v0.3.4 (2015-02-23)
 
-* upgrade to ELixir 1.0
+* upgrade to Elixir 1.0
 * use iolist_to_binary in `flush/1` to reflect how it works with sockets
 * text() macro turns arg into a string instead of just passing value
 
