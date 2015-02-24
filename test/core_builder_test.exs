@@ -16,38 +16,38 @@ defmodule WebAssembly.Core.Builder.Test do
   import __MODULE__.Helpers
 
   test "empty scope" do
-    start; new_scope; release_scope
-    assert finish == []
+    fire; new_scope; release_scope
+    assert return == []
   end
 
   test "push 1 value" do
-    start; new_scope
+    fire; new_scope
     push 1
     release_scope
-    assert finish == [1]
+    assert return == [1]
   end
 
   test "push 2 values" do
-    start; new_scope
+    fire; new_scope
     push 1
     push 2
     release_scope
-    assert finish == [1,2]
+    assert return == [1,2]
   end
 
   test "push 1 element" do
-    start; new_scope
+    fire; new_scope
     push el(:foo, "bar")
     release_scope
-    assert finish |> flush == "<foo>bar</foo>"
+    assert return |> flush == "<foo>bar</foo>"
   end
 
   test "push 2 elements" do
-    start; new_scope
+    fire; new_scope
     push el(:foo, "1")
     push el(:bar, "2")
     release_scope
-    assert finish |> flush == """
+    assert return |> flush == """
        <foo>1</foo>
        <bar>2</bar>
     """
@@ -55,7 +55,7 @@ defmodule WebAssembly.Core.Builder.Test do
   end
 
   test "push 2 elements nested and 3rd sister to 1st" do
-    start; new_scope
+    fire; new_scope
     push el_start(:foo)
       new_scope
       push el(:bar, "inner")
@@ -63,7 +63,7 @@ defmodule WebAssembly.Core.Builder.Test do
     push el_end(:foo)
     push el(:quux, "sister")
     release_scope
-    assert finish |> flush == """
+    assert return |> flush == """
       <foo>
         <bar>inner</bar>
       </foo>
@@ -73,7 +73,7 @@ defmodule WebAssembly.Core.Builder.Test do
   end
 
   test "push 2 sister elements & then 2 nested inside 2nd sister" do
-    start; new_scope
+    fire; new_scope
     push el(:foo, "sister1")
     push el_start(:bar)
       new_scope
@@ -83,7 +83,7 @@ defmodule WebAssembly.Core.Builder.Test do
       release_scope
     push el_end(:bar)
     release_scope
-    assert finish |> flush == """
+    assert return |> flush == """
       <foo>sister1</foo>
       <bar>
         sister2

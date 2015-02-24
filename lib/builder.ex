@@ -13,9 +13,9 @@ defmodule WebAssembly.Builder do
   defmacro builder(do: body) do
     quote do
       import  WebAssembly.DSL.Internal
-      WebAssembly.Core.Builder.start
+      WebAssembly.Core.Builder.fire
       with_scope do: unquote(body)
-      WebAssembly.Core.Builder.finish
+      WebAssembly.Core.Builder.return
     end
   end
 end

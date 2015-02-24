@@ -5,8 +5,6 @@ defmodule Core do
   @moduledoc false #todo
 
   defmodule Builder do
-    @moduledoc false #todo
-
     @s __MODULE__
     @pid_key :builder_pid
 
@@ -14,8 +12,8 @@ defmodule Core do
 
     defp pid(), do: Process.get(@pid_key)
 
-    @spec start() :: :ok
-    def start() do
+    @spec fire() :: :ok
+    def fire() do
       {:ok, pid} = Agent.start_link(fn -> %@s{} end)
       Process.put(@pid_key, pid)
       :ok
@@ -51,8 +49,8 @@ defmodule Core do
 
     require WebAssembly.Types, as: T
 
-    @spec finish() :: [T.content]
-    def finish() do
+    @spec return() :: [T.content]
+    def return() do
       result = Agent.get(pid, fn
         %{scopes: :finished, result: res} ->
         res
