@@ -52,7 +52,8 @@ defmodule Core do
 
     @spec finish() :: [T.content]
     def finish() do
-      result = Agent.get(pid, fn %{result: res} when not is_nil(res) ->
+      result = Agent.get(pid, fn
+        %{scopes: :finished, result: res} ->
         res
       end)
       :ok = Agent.stop(pid)
