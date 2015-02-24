@@ -7,16 +7,16 @@ defmodule Core do
 
   defmodule Builder do
     @s __MODULE__
-    @builder_pid :builder_pid
+    @pid_key :builder_pid
 
     defstruct scopes: [], result: nil
 
-    defp pid(), do: Process.get(@builder_pid)
+    defp pid(), do: Process.get(@pid_key)
 
     @spec start() :: :ok
     def start() do
       {:ok, pid} = Agent.start_link(fn -> %@s{} end)
-      Process.put(@builder_pid, pid)
+      Process.put(@pid_key, pid)
       :ok
     end
 
