@@ -21,3 +21,4 @@ if [[ $1 == test ]]; then
     shift
     echo -n "Running tests.. "; mix test $@
 fi
+wait
