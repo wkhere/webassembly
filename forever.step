@@ -13,12 +13,24 @@ if [ -n "$Elixir_src" ]; then
 fi
 
 [ -z "$1" ] && set -- "test"
+
 echo -n "Compiling dev.. "; time mix compile
 which ctags >/dev/null && ctags --languages=Elixir,Erlang -R $ctags_dirs &
+
 [[ $1 == doc* ]] && mix docs
 [[ $1 == dia* ]] && time nice mix dialyze --no-check  --error-handling --race-conditions --underspecs --unmatched-returns
+if [[ $1 == cov* ]]; then
+    echo -n "Running coverage.. "
+    shift
+    if [ -z "$@" ]; then
+        MIX_ENV=test mix coveralls
+    else
+        MIX_ENV=test mix coveralls.detail $@
+    fi
+fi
 if [[ $1 == test ]]; then
     shift
     echo -n "Running tests.. "; mix test $@
 fi
-wait
+
+wait # for ctags
