@@ -25,7 +25,7 @@ defmodule WebAssembly.Builder do
     end
   end
 
-  defmacro builder(expr) do
+  defmacro build(expr) do
     quote do: (builder do: unquote(expr))
   end
 end

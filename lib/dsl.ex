@@ -22,11 +22,11 @@ defmodule WebAssembly.DSL do
 
   ## Examples
 
-      iex> builder do: (element :div, do: (element :span, "foo"))
+      iex> build element :div, do: (element :span, "foo")
       ["\n<div>", ["\n<span>", "foo", "</span>"], "</div>"]
 
-      iex> (builder do: element(:a,
-      iex>    [href: "#foo", data_toggle: "modal"], "bar"))
+      iex> build(element :a,
+      iex>    [href: "#foo", data_toggle: "modal"], "bar")
       iex> |> WebAssembly.Tools.Output.flush
       "\n<a href=\"#foo\" data-toggle=\"modal\">bar</a>"
 
@@ -63,8 +63,8 @@ defmodule WebAssembly.DSL do
 
   ## Examples
 
-      iex> (builder do: void_element(:meta,
-      iex>    http_equiv: "Content-Type", content: "text/html"))
+      iex> build(void_element :meta,
+      iex>    http_equiv: "Content-Type", content: "text/html")
       iex> |> WebAssembly.Tools.Output.flush
       "\n<meta http-equiv=\"Content-Type\" content=\"text/html\" />"
 
@@ -88,9 +88,9 @@ defmodule WebAssembly.DSL do
 
   ## Examples
 
-      iex> builder do: value "what are your values?"
+      iex> build value "what are your values?"
       ["what are your values?"]
-      iex> (builder do: (element :foo, do: value "bar"))
+      iex> build(element :foo, do: value "bar")
       iex> |> WebAssembly.Tools.Output.flush
       "\n<foo>bar</foo>"
   """
