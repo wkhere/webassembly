@@ -4,7 +4,7 @@ defmodule WebAssembly.Mixfile do
   def project do
     [app: :webassembly,
      docs: [main: WebAssembly],
-     version: "0.6.0-dev",
+     version: "0.5.2-dev",
      elixir: "~> 1.0.0",
      deps: deps,
      description: description,
