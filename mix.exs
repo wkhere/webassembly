@@ -38,7 +38,7 @@ defmodule WebAssembly.Mixfile do
   end
 
   defp package do
-    [ contributors: ["Wojciech Kaczmarek"],
+    [ maintainers: ["Wojciech Kaczmarek"],
       licenses: ["BSD"],
       description: description,
       links: %{
