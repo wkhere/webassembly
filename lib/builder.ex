@@ -14,7 +14,7 @@ defmodule WebAssembly.Builder do
   controllers/handlers).
   """
   # ^ todo: link to examples, eg. in `WebAssembly` doc
-  defmacro builder(do_block_or_expr)
+  defmacro builder(do_block)
 
   defmacro builder(do: body) do
     quote do
