@@ -5,7 +5,7 @@ defmodule WebAssembly.Mixfile do
     [app: :webassembly,
      docs: [main: WebAssembly],
      version: "0.6.0-dev",
-     elixir: "~> 1.0.0",
+     elixir: "~> 1.0",
      deps: deps,
      description: description,
      package: package,
