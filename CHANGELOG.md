@@ -1,3 +1,5 @@
+### v0.6.1-dev
+
 ### v0.6.0 "One step for an API is a big step for a codebase" (2015-10-14)
 
 * `build(expr)` as a simpler counterpart to `build do..`
