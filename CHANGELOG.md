@@ -1,11 +1,11 @@
 ### v0.6.1-dev
 
-### v0.6.0 "One step for an API is a big step for a codebase" (2015-10-14)
+### v0.6.0 (2015-10-14)
 
 * `build(expr)` as a simpler counterpart to `build do..`
 * update to Elixir 1.1 and OTP 18
 
-### v0.5.1 "Because I can"
+### v0.5.1
 
 * impl: in-Core renames, docs etc
 * fix Core typespecs (was invalid since bc5d06e - 0.4.0)
