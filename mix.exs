@@ -4,7 +4,7 @@ defmodule WebAssembly.Mixfile do
   def project do
     [app: :webassembly,
      docs: [main: WebAssembly],
-     version: "0.6.1-dev",
+     version: "0.6.1",
      elixir: "~> 1.0",
      deps: deps,
      description: description,
@@ -38,7 +38,8 @@ defmodule WebAssembly.Mixfile do
   end
 
   defp package do
-    [ maintainers: ["Wojciech Kaczmarek"],
+    [ maintainers: ["Wojciech Kaczmarek",
+        "Roman Heinrich"],
       licenses: ["BSD"],
       description: description,
       links: %{

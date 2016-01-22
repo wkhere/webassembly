@@ -1,4 +1,9 @@
-### v0.6.1-dev
+### v0.6.1 (2016-01-22)
+
+Elixir 1.2 goodies:
+
+* get rid of paren warnings [thx mindreframer]
+* ex_doc compatible with 1.2
 
 ### v0.6.0 (2015-10-14)
 

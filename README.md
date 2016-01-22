@@ -67,7 +67,7 @@ your template engine to render the whole page.
 
 ## Usage
 
-WebAssembly is published on [Hex], so just add `{:webassembly, "~> 0.6.0"}`
+WebAssembly is published on [Hex], so just add `{:webassembly, "~> 0.6"}`
 to your deps and `:webassembly` to your apps in the `mix.exs`.
 
 Using it with [Plug] is a no-brainer - you just pass the doc to `send_resp/3`:
