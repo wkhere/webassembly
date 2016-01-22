@@ -37,19 +37,19 @@ defmodule WebAssembly.HTML do
 
   # macros generation
 
-  @nonvoid_elements |> Enum.each fn name ->
+  @nonvoid_elements |> Enum.each(fn name ->
       defmacro unquote(name)(attrs\\[], content) do
         e = unquote(name)
         quote do: element(unquote(e), unquote(attrs), unquote(content))
       end
-    end
+    end)
 
-  @void_elements |> Enum.each fn name ->
+  @void_elements |> Enum.each(fn name ->
       defmacro unquote(name)(attrs\\[]) do
         e = unquote(name)
         quote do: void_element(unquote(e), unquote(attrs))
       end
-    end
+    end)
 
   # special cases
 
