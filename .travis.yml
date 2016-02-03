@@ -9,6 +9,8 @@ matrix:
     - elixir: 1.2.2
       otp_release: 18.1
 
+sudo: false
+
 env: MIX_ENV=test
 after_success:
   - mix coveralls.travis
