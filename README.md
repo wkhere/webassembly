@@ -1,8 +1,8 @@
 WebAssembly
 ===========
 [![beauty inside!](http://img.shields.io/badge/beauty-inside-80b0ff.svg)](http://en.wikipedia.org/wiki/Beauty)
-[![Build Status](https://travis-ci.org/herenowcoder/webassembly.svg?branch=master)](https://travis-ci.org/herenowcoder/webassembly)
-[![Coverage Status](https://img.shields.io/coveralls/herenowcoder/webassembly.svg)](https://coveralls.io/r/herenowcoder/webassembly)
+[![Build Status](https://travis-ci.org/wkhere/webassembly.svg?branch=master)](https://travis-ci.org/wkhere/webassembly)
+[![Coverage Status](https://img.shields.io/coveralls/wkhere/webassembly.svg)](https://coveralls.io/r/wkhere/webassembly)
 [![hex.pm version](https://img.shields.io/hexpm/v/webassembly.svg)](https://hex.pm/packages/webassembly)
 [![hex.pm downloads](https://img.shields.io/hexpm/dt/webassembly.svg)](https://hex.pm/packages/webassembly)
 
