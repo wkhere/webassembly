@@ -18,9 +18,9 @@ defmodule WebAssembly.Partial.Test do
   test "use some partial funs" do
     buf = builder do
       element :foo, "content"
-      partial1
+      partial1()
       element :quux do
-        partial2
+        partial2()
       end
     end
     assert buf |> flush == """
@@ -33,6 +33,6 @@ defmodule WebAssembly.Partial.Test do
       </quux>
     """
     |> no_indent |> no_lf
-  end  
+  end
 
 end

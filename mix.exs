@@ -6,9 +6,9 @@ defmodule WebAssembly.Mixfile do
      docs: [main: WebAssembly],
      version: "0.6.2-dev",
      elixir: "~> 1.0",
-     deps: deps,
-     description: description,
-     package: package,
+     deps: deps(),
+     description: description(),
+     package: package(),
      test_coverage: [tool: ExCoveralls]]
   end
 
@@ -41,7 +41,7 @@ defmodule WebAssembly.Mixfile do
     [ maintainers: ["Wojciech Kaczmarek",
         "Roman Heinrich"],
       licenses: ["BSD"],
-      description: description,
+      description: description(),
       links: %{
         "GitHub"    => "https://github.com/herenowcoder/webassembly",
         "HexDocs"   => "http://hexdocs.pm/webassembly",

@@ -31,7 +31,7 @@ defmodule WebAssembly.Core do
     """
     @spec new_scope() :: :ok
     def new_scope() do
-      Agent.update(pid, fn %{scopes: scopes} = state -> 
+      Agent.update(pid(), fn %{scopes: scopes} = state ->
         %{ state | scopes: [[]|scopes] }
       end)
     end
@@ -41,7 +41,7 @@ defmodule WebAssembly.Core do
     """
     @spec push(T.content) :: :ok
     def push(value) do
-      Agent.update(pid, fn %{scopes: [scope|prevs]} = state ->
+      Agent.update(pid(), fn %{scopes: [scope|prevs]} = state ->
         %{ state | scopes: [[value|scope] | prevs] }
       end)
     end
@@ -55,7 +55,7 @@ defmodule WebAssembly.Core do
     def release_scope() do
       import Enum, only: [reverse: 1]
 
-      Agent.update(pid, fn
+      Agent.update(pid(), fn
         %{scopes: [scope1,scope0|prevs]} = state ->
           scope_merged = [reverse(scope1) | scope0]
           %{ state | scopes: [scope_merged | prevs] }
@@ -70,11 +70,11 @@ defmodule WebAssembly.Core do
     """
     @spec return() :: [T.content]
     def return() do
-      result = Agent.get(pid, fn
+      result = Agent.get(pid(), fn
         %{scopes: :released, result: res} ->
         res
       end)
-      :ok = Agent.stop(pid)
+      :ok = Agent.stop(pid())
       result
     end
   end

@@ -27,7 +27,7 @@ defmodule WebAssembly.StructureTest do
           title "hey!"
         end
         body do
-          text "foo"; br
+          text "foo"; br()
           div do
             text "inner"
           end

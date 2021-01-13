@@ -4,21 +4,21 @@ defmodule WebAssembly.RealWorldTest do
   use    WebAssembly
 
   test "empty p" do
-    assert (builder do: p) |> flush == "<p></p>"
+    assert (builder do: p()) |> flush == "<p></p>"
     assert (builder do
       div do
-          p; p
-      end; p
+          p(); p()
+      end; p()
     end) |> flush == "<div><p></p><p></p></div><p></p>"
   end
 
   test "empty p's and filled p's" do
     doc = builder do
       p "par1"
-      p
+      p()
       p class: "c1" do
         text "foo"
-        p
+        p()
       end
     end
     assert doc |> flush == """

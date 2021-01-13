@@ -8,7 +8,7 @@ defmodule WebAssembly.Moduledoc.Test do
     use WebAssembly
     doc = builder do
         div class: "container" do
-          n = get_the_size
+          n = get_the_size()
           if n > 1 do
             ul do
               for index <- 1..n, do:

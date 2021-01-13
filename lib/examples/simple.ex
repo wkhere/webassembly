@@ -37,6 +37,6 @@ defmodule WebAssembly.Examples do
 
   @spec readme_ex_flushed :: binary
   def readme_ex_flushed do
-    readme_ex |> flush
+    readme_ex() |> flush()
   end
 end
