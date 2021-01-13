@@ -18,14 +18,14 @@ defmodule WebAssembly.Builder do
 
   defmacro builder(do: body) do
     quote do
-      import  WebAssembly.DSL.Internal
-      WebAssembly.Core.Engine.fire
-      with_scope do: unquote(body)
-      WebAssembly.Core.Engine.return
+      import WebAssembly.DSL.Internal
+      WebAssembly.Core.Engine.fire()
+      with_scope(do: unquote(body))
+      WebAssembly.Core.Engine.return()
     end
   end
 
   defmacro build(expr) do
-    quote do: (builder do: unquote(expr))
+    quote do: builder(do: unquote(expr))
   end
 end

@@ -7,9 +7,7 @@ defmodule WebAssembly.Tools do
 
   alias WebAssembly.Types, as: T
 
-
   defmodule Input do
-
     @doc ~S"""
     Turn a keyword list of attributes to an list of attribute framgents
     in a format used by html.
@@ -24,20 +22,18 @@ defmodule WebAssembly.Tools do
         ["http-equiv=\"Content-Type\""]
     """
 
-    @spec htmlize_attributes(T.attributes) :: T.assembled_attributes
+    @spec htmlize_attributes(T.attributes()) :: T.assembled_attributes()
 
     def htmlize_attributes(attrs) do
-      Enum.map(attrs, fn {k,v} ->
-      k = k |> to_string |> String.replace("_", "-")
+      Enum.map(attrs, fn {k, v} ->
+        k = k |> to_string |> String.replace("_", "-")
         ~s/#{k}="#{v}"/
       end)
       |> Enum.intersperse(" ")
     end
   end
 
-
   defmodule Output do
-
     @doc ~S"""
     Flush nested list of HTML elements into a flat string.
 
@@ -55,10 +51,10 @@ defmodule WebAssembly.Tools do
         "\n<div>\n<span>hey!</span></div>"
     """
 
-    @spec flush(T.assembled_elements) :: binary
+    @spec flush(T.assembled_elements()) :: binary
 
     def flush(chunks) when is_list(chunks) do
-      chunks |> :erlang.iolist_to_binary
+      chunks |> :erlang.iolist_to_binary()
     end
   end
 end

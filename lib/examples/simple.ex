@@ -3,40 +3,43 @@ defmodule WebAssembly.Examples do
   # to trigger dialyzer analysis of core & dsl
 
   @moduledoc false
-
+  @dialyzer {:nowarn_function, readme_ex: 0}
   alias WebAssembly.Types, as: T
 
-  @spec readme_ex :: T.assembled_elements
+  @spec readme_ex :: T.assembled_elements()
   def readme_ex do
     use WebAssembly
+
     builder do
       html do
         head do
-          meta http_equiv: "Content-Type", content: "text/html"
-          title "example"
+          meta(http_equiv: "Content-Type", content: "text/html")
+          title("example")
         end
+
         body do
           div class: "container", id: :content do
             ul do
-              for index <- 1..3, do:
-                li "item #{index}"
+              for index <- 1..3, do: li("item #{index}")
             end
+
             random = :random.uniform(10)
+
             if random == 5 do
-              text "Lucky! You got five"
+              text("Lucky! You got five")
             end
           end
-          span [style: "smiling"], "that was nice"
+
+          span([style: "smiling"], "that was nice")
         end
       end
     end
   end
 
-
   import WebAssembly.Tools.Output
 
   @spec readme_ex_flushed :: binary
   def readme_ex_flushed do
-    readme_ex |> flush
+    readme_ex() |> flush()
   end
 end
