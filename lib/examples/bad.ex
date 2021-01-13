@@ -4,7 +4,7 @@ defmodule WebAssembly.BadExamples do
   @moduledoc false
 
   # alias WebAssembly.Types, as: T
-
+  @dialyzer {:nowarn_function, bad1: 0}
   use WebAssembly
 
   def bad1 do

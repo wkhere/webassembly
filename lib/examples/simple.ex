@@ -3,7 +3,7 @@ defmodule WebAssembly.Examples do
   # to trigger dialyzer analysis of core & dsl
 
   @moduledoc false
-
+  @dialyzer {:nowarn_function, readme_ex: 0}
   alias WebAssembly.Types, as: T
 
   @spec readme_ex :: T.assembled_elements()
