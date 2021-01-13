@@ -3,14 +3,14 @@ defmodule WebAssembly.BadExamples do
 
   @moduledoc false
 
-  #alias WebAssembly.Types, as: T
+  # alias WebAssembly.Types, as: T
 
   use WebAssembly
 
   def bad1 do
     builder do
-      span 1
-      span :not_text
+      span(1)
+      span(:not_text)
     end
   end
 end

@@ -6,5 +6,4 @@ defmodule WebAssembly.BadExamplesTest do
   test "bad examples" do
     assert_raise ArgumentError, fn -> bad1() |> flush end
   end
-
 end

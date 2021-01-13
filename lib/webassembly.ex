@@ -23,13 +23,14 @@ defmodule WebAssembly do
         end
       end
   """
+
   # ^todo: mode docs on nesting, loops, partials ..etc
 
   defmacro __using__(_opts) do
     quote do
       import WebAssembly.DSL
       import WebAssembly.Builder
-      use    WebAssembly.HTML
+      use WebAssembly.HTML
       :ok
     end
   end

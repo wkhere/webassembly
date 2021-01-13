@@ -3,7 +3,6 @@ defmodule WebAssembly.DSL do
   Basic DSL for assembling HTML elements from blocks.
   """
 
-
   @doc ~S"""
   Create HTML element in the assembly scope,
   possibly nesting a new scope.
@@ -31,24 +30,21 @@ defmodule WebAssembly.DSL do
       "\n<a href=\"#foo\" data-toggle=\"modal\">bar</a>"
 
   """
-  defmacro element(name, attributes\\[], content)
+  defmacro element(name, attributes \\ [], content)
 
   defmacro element(name, attributes, do: body) do
     quote do
       import WebAssembly.DSL.Internal
-      add_scoped_element!(unquote(name), unquote(attributes),
-        with_scope do: unquote(body))
+      add_scoped_element!(unquote(name), unquote(attributes), with_scope(do: unquote(body)))
     end
   end
 
   defmacro element(name, attributes, flat_content) do
     quote do
       import WebAssembly.DSL.Internal
-      add_element!(unquote(name),
-        unquote(attributes), unquote(flat_content))
+      add_element!(unquote(name), unquote(attributes), unquote(flat_content))
     end
   end
-
 
   @doc ~S"""
   Create HTML void element (ie. element without content)
@@ -69,13 +65,12 @@ defmodule WebAssembly.DSL do
       "\n<meta http-equiv=\"Content-Type\" content=\"text/html\" />"
 
   """
-  defmacro void_element(name, attributes\\[]) do
+  defmacro void_element(name, attributes \\ []) do
     quote do
       import WebAssembly.DSL.Internal
       add_void_element!(unquote(name), unquote(attributes))
     end
   end
-
 
   @doc ~S"""
   Create any value in the assembly scope.
@@ -99,9 +94,9 @@ defmodule WebAssembly.DSL do
   end
 end
 
-
 defmodule WebAssembly.DSL.Internal do
-  @moduledoc false #todo
+  # todo
+  @moduledoc false
 
   defmodule Tags do
     @moduledoc false
@@ -111,23 +106,21 @@ defmodule WebAssembly.DSL.Internal do
     defmacro tag_start(tag, []) do
       quote do: "\n<#{unquote(tag)}>"
     end
+
     defmacro tag_start(tag, attributes) do
-      quote do: ["\n<#{unquote(tag)} ",
-                  htmlize_attributes(unquote(attributes)), ">"]
+      quote do: ["\n<#{unquote(tag)} ", htmlize_attributes(unquote(attributes)), ">"]
     end
 
     defmacro tag_end(tag) do
       quote do: "</#{unquote(tag)}>"
     end
 
-    defmacro tag_only(tag, []), do:
-      quote do: "<#{unquote(tag)} />"
+    defmacro tag_only(tag, []), do: quote(do: "<#{unquote(tag)} />")
+
     defmacro tag_only(tag, attributes) do
-      quote do: ["\n<#{unquote(tag)} ",
-                  htmlize_attributes(unquote(attributes)), " />"]
+      quote do: ["\n<#{unquote(tag)} ", htmlize_attributes(unquote(attributes)), " />"]
     end
   end
-
 
   @doc """
   Manage assembly scopes.
@@ -136,9 +129,9 @@ defmodule WebAssembly.DSL.Internal do
 
   defmacro with_scope(do: body) do
     quote do
-      WebAssembly.Core.Engine.new_scope
+      WebAssembly.Core.Engine.new_scope()
       unquote(body)
-      WebAssembly.Core.Engine.release_scope
+      WebAssembly.Core.Engine.release_scope()
     end
   end
 
@@ -151,25 +144,25 @@ defmodule WebAssembly.DSL.Internal do
   defmacro add_scoped_element!(name, attributes, content) do
     quote do
       import Tags
-      add_value! tag_start(unquote(name), unquote(attributes))
+      add_value!(tag_start(unquote(name), unquote(attributes)))
       unquote(content)
-      add_value! tag_end(unquote(name))
+      add_value!(tag_end(unquote(name)))
     end
   end
 
   defmacro add_element!(name, attributes, content) do
     quote do
       import Tags
-      add_value! tag_start(unquote(name), unquote(attributes))
-      add_value! unquote(content)
-      add_value! tag_end(unquote(name))
+      add_value!(tag_start(unquote(name), unquote(attributes)))
+      add_value!(unquote(content))
+      add_value!(tag_end(unquote(name)))
     end
   end
 
   defmacro add_void_element!(name, attributes) do
     quote do
       import Tags
-      add_value! tag_only(unquote(name), unquote(attributes))
+      add_value!(tag_only(unquote(name), unquote(attributes)))
     end
   end
 end
