@@ -1,4 +1,8 @@
-### v0.6.2-dev
+### v0.6.2 (2021-01-13)
+* get rid of paren warnings
+* configure elixir formatter
+* upgrade all packages to most recent versions
+* migrate CI from Travis-CI to Github Actions
 
 ### v0.6.1 (2016-01-22)
 
