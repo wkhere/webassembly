@@ -105,6 +105,7 @@ WebAssembly aims to have 100% [test coverage][cov].
 ## Type Safety
 
 As for releases `0.3.0` and above WebAssembly [dialyzes][dia] with no warnings.
+Run `mix dialyzer` to validate locally.
 
 ## Thanks
 

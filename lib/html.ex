@@ -37,25 +37,27 @@ defmodule WebAssembly.HTML do
 
   # macros generation
 
-  @nonvoid_elements |> Enum.each(fn name ->
-      defmacro unquote(name)(attrs\\[], content) do
-        e = unquote(name)
-        quote do: element(unquote(e), unquote(attrs), unquote(content))
-      end
-    end)
+  @nonvoid_elements
+  |> Enum.each(fn name ->
+    defmacro unquote(name)(attrs \\ [], content) do
+      e = unquote(name)
+      quote do: element(unquote(e), unquote(attrs), unquote(content))
+    end
+  end)
 
-  @void_elements |> Enum.each(fn name ->
-      defmacro unquote(name)(attrs\\[]) do
-        e = unquote(name)
-        quote do: void_element(unquote(e), unquote(attrs))
-      end
-    end)
+  @void_elements
+  |> Enum.each(fn name ->
+    defmacro unquote(name)(attrs \\ []) do
+      e = unquote(name)
+      quote do: void_element(unquote(e), unquote(attrs))
+    end
+  end)
 
   # special cases
 
-  defmacro html(attrs\\[], content) do
+  defmacro html(attrs \\ [], content) do
     quote do
-      value "<!DOCTYPE html>"
+      value("<!DOCTYPE html>")
       element(:html, unquote(attrs), unquote(content))
     end
   end
@@ -64,8 +66,7 @@ defmodule WebAssembly.HTML do
     quote do: value("#{unquote(content)}")
   end
 
-  defmacro p(), do:
-    quote do: element(:p, [])
+  defmacro p(), do: quote(do: element(:p, []))
 
   # meta helpers
 

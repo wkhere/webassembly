@@ -15,7 +15,6 @@ defmodule WebAssembly.Core do
 
     defp pid(), do: Process.get(@pid_key)
 
-
     @doc """
     Fire up the engine accessible within the current Erlang process.
     """
@@ -31,18 +30,18 @@ defmodule WebAssembly.Core do
     """
     @spec new_scope() :: :ok
     def new_scope() do
-      Agent.update(pid, fn %{scopes: scopes} = state -> 
-        %{ state | scopes: [[]|scopes] }
+      Agent.update(pid(), fn %{scopes: scopes} = state ->
+        %{state | scopes: [[] | scopes]}
       end)
     end
 
     @doc """
     Push `value` into the current scope.
     """
-    @spec push(T.content) :: :ok
+    @spec push(T.content()) :: :ok
     def push(value) do
-      Agent.update(pid, fn %{scopes: [scope|prevs]} = state ->
-        %{ state | scopes: [[value|scope] | prevs] }
+      Agent.update(pid(), fn %{scopes: [scope | prevs]} = state ->
+        %{state | scopes: [[value | scope] | prevs]}
       end)
     end
 
@@ -55,26 +54,28 @@ defmodule WebAssembly.Core do
     def release_scope() do
       import Enum, only: [reverse: 1]
 
-      Agent.update(pid, fn
-        %{scopes: [scope1,scope0|prevs]} = state ->
+      Agent.update(pid(), fn
+        %{scopes: [scope1, scope0 | prevs]} = state ->
           scope_merged = [reverse(scope1) | scope0]
-          %{ state | scopes: [scope_merged | prevs] }
+          %{state | scopes: [scope_merged | prevs]}
 
         %{scopes: [scope]} ->
-          %@s{ result: reverse(scope), scopes: :released }
+          %@s{result: reverse(scope), scopes: :released}
       end)
     end
 
     @doc """
     Shutdown the engine and return the assembled structure.
     """
-    @spec return() :: [T.content]
+    @spec return() :: [T.content()]
     def return() do
-      result = Agent.get(pid, fn
-        %{scopes: :released, result: res} ->
-        res
-      end)
-      :ok = Agent.stop(pid)
+      result =
+        Agent.get(pid(), fn
+          %{scopes: :released, result: res} ->
+            res
+        end)
+
+      :ok = Agent.stop(pid())
       result
     end
   end
